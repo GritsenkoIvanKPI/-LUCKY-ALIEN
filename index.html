@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Alien – розплідник папійонів</title>
+<meta name="description" content="Lucky Alien – розплідник континентального той-спанієля (папійона). Плідники з родоводом FCI, здорові та соціалізовані цуценята, доставка у весь світ.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Marck+Script&display=swap" rel="stylesheet">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230e0d0c'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%23c8b183' stroke-width='3'/%3E%3Ctext x='50' y='63' text-anchor='middle' font-family='Georgia, serif' font-size='34' fill='%23c8b183'%3ELA%3C/text%3E%3C/svg%3E">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0e0d0c',
+          ink2: '#17150f',
+          paper: '#fdfcfa',
+          gold: '#c8b183',
+          goldDeep: '#a4854f',
+          goldPale: '#ecdfc4',
+          body: '#5b5a56',
+          heading: '#1b1a17',
+          sand: '#ecdfc2',
+        },
+        fontFamily: {
+          sans: ['Montserrat', 'sans-serif'],
+          script: ['"Marck Script"', 'cursive'],
+        },
+        maxWidth: {
+          content: '1280px',
+        },
+        transitionTimingFunction: {
+          spring: 'cubic-bezier(.16,1,.3,1)',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root { color-scheme: light; }
+  html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 7rem; }
+  body {
+    background: #fdfcfa;
+    font-feature-settings: "ss01";
+  }
+
+  ::selection { background: #c8b183; color: #0e0d0c; }
+
+  /* corner photo collage behind credentials strip */
+  .corner-photo {
+    position: absolute;
+    width: 12.5rem;
+    height: 12.5rem;
+    object-fit: cover;
+    border-radius: 1.25rem;
+    box-shadow: 0 26px 45px -18px rgba(27,26,23,0.28);
+    transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+  }
+  .corner-photo:hover { transform: scale(1.04) rotate(0deg) !important; }
+
+  /* grain texture for dark sections */
+  .grain { position: relative; }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wave { display: block; width: 100%; height: auto; color: #c8b183; }
+
+  /* About section: pinned scroll-driven step swap (desktop only) */
+  .about-track { height: 230vh; }
+
+  .about-step-text {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
+    pointer-events: none;
+  }
+  .about-step-text[data-active="true"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .about-step-img {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(7%);
+    transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1);
+    z-index: 1;
+  }
+  .about-step-img[data-state="active"] { opacity: 1; transform: translateY(0); z-index: 3; }
+  .about-step-img[data-state="past"] { opacity: 0; transform: translateY(-7%); z-index: 2; }
+  .about-step-img[data-state="upcoming"] { opacity: 0; transform: translateY(7%); z-index: 1; }
+
+  .mono-mark { font-family: 'Marck Script', cursive; font-size: 40px; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .08s; }
+  .reveal-delay-2 { transition-delay: .16s; }
+  .reveal-delay-3 { transition-delay: .24s; }
+
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    padding: 0.95rem 2.1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: transform 0.45s cubic-bezier(.16,1,.3,1), background-color 0.45s cubic-bezier(.16,1,.3,1), color 0.45s cubic-bezier(.16,1,.3,1), box-shadow 0.45s cubic-bezier(.16,1,.3,1);
+    white-space: nowrap;
+  }
+  .btn-pill:hover { transform: translateY(-2px); }
+  .btn-pill:active { transform: translateY(0); }
+  .btn-pill:focus-visible { outline: 2px solid #c8b183; outline-offset: 3px; }
+
+  .btn-gold-solid {
+    background: #c8b183;
+    color: #0e0d0c;
+    border-color: #c8b183;
+    box-shadow: 0 10px 24px -10px rgba(200,177,131,0.55);
+  }
+  .btn-gold-solid:hover { background: #dcc79a; box-shadow: 0 14px 30px -10px rgba(200,177,131,0.7); }
+
+  .btn-outline-light { color: #f3efe6; border-color: rgba(243,239,230,0.4); }
+  .btn-outline-light:hover { color: #0e0d0c; background: #f3efe6; border-color: #f3efe6; }
+
+  .btn-outline-gold { color: #8a723f; border-color: #c8b183; }
+  .btn-outline-gold:hover { color: #0e0d0c; background: #c8b183; border-color: #c8b183; }
+
+  .nav-link {
+    position: relative;
+    letter-spacing: 0.12em;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 1px;
+    background: #c8b183;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+  }
+  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  .field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(243,239,230,0.28);
+    color: #f3efe6;
+    padding: 0.9rem 0.1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.35s cubic-bezier(.16,1,.3,1);
+  }
+  .field::placeholder { color: rgba(243,239,230,0.42); }
+  .field:focus { outline: none; border-color: #c8b183; }
+  .field:focus-visible { outline: none; }
+
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(200,177,131,0.45);
+    color: #c8b183;
+    transition: transform 0.4s cubic-bezier(.16,1,.3,1), background-color 0.4s cubic-bezier(.16,1,.3,1), color 0.4s cubic-bezier(.16,1,.3,1);
+  }
+  .social-icon:hover { background: #c8b183; color: #0e0d0c; transform: translateY(-3px); }
+  .social-icon:focus-visible { outline: 2px solid #c8b183; outline-offset: 2px; }
+
+  .lang-item[data-active="true"] { color: #1b1a17; font-weight: 700; }
+  .lang-item[data-active="false"] { color: rgba(27,26,23,0.32); cursor: not-allowed; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid rgba(200,177,131,0.5);
+    color: #8a723f;
+    background: #fbf8f2;
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+
+  .card-elevated {
+    background: #ffffff;
+    border-radius: 1.75rem;
+    box-shadow: 0 2px 4px rgba(27,26,23,0.04), 0 24px 48px -24px rgba(27,26,23,0.18);
+    transition: transform 0.5s cubic-bezier(.16,1,.3,1), box-shadow 0.5s cubic-bezier(.16,1,.3,1);
+  }
+  .card-elevated:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 2px 4px rgba(27,26,23,0.05), 0 34px 60px -22px rgba(27,26,23,0.24);
+  }
+
+  .tilt-card {
+    transform: rotate(-1.1deg);
+    box-shadow: 0 2px 4px rgba(27,26,23,0.04), 0 30px 60px -26px rgba(27,26,23,0.22);
+    transition: transform 0.55s cubic-bezier(.16,1,.3,1), box-shadow 0.55s cubic-bezier(.16,1,.3,1);
+  }
+  .tilt-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 2px 4px rgba(27,26,23,0.05), 0 38px 70px -24px rgba(27,26,23,0.28);
+  }
+
+  .field-label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: rgba(27,26,23,0.4);
+    margin-bottom: 0.5rem;
+  }
+  .field-light {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(27,26,23,0.14);
+    color: #1b1a17;
+    padding: 0.5rem 0.05rem;
+    font-size: 0.95rem;
+    transition: border-color 0.35s cubic-bezier(.16,1,.3,1);
+  }
+  .field-light::placeholder { color: rgba(27,26,23,0.3); }
+  .field-light:focus { outline: none; border-color: #c8b183; }
+  .field-light:focus-visible { outline: none; }
+
+  .contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(200,177,131,0.5);
+    color: #a4854f;
+    flex-shrink: 0;
+  }
+
+  .trust-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(27,26,23,0.25);
+  }
+
+  .img-frame { position: relative; overflow: hidden; }
+  .img-frame img { transition: transform 1.1s cubic-bezier(.16,1,.3,1); }
+  .img-frame:hover img { transform: scale(1.045); }
+
+  .sticky-nav {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(253,252,250,0.86);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .sticky-nav.scrolled { background: rgba(253,252,250,0.97); box-shadow: 0 8px 30px -16px rgba(27,26,23,0.18); border-bottom-color: rgba(27,26,23,0.06); }
+
+  .nav-pill {
+    padding: 0.6rem 1.15rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5b5a56;
+    transition: background-color 0.35s cubic-bezier(.16,1,.3,1), color 0.35s cubic-bezier(.16,1,.3,1);
+    white-space: nowrap;
+  }
+  .nav-pill:hover { color: #1b1a17; }
+  .nav-pill[data-active="true"] { background: #1b1a17; color: #fdfcfa; }
+
+  .btn-dark-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    background: #1b1a17;
+    color: #fdfcfa;
+    border-radius: 999px;
+    padding: 0.5rem 0.5rem 0.5rem 1.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: transform 0.45s cubic-bezier(.16,1,.3,1), box-shadow 0.45s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 14px 28px -14px rgba(27,26,23,0.5);
+  }
+  .btn-dark-pill:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -14px rgba(27,26,23,0.6); }
+  .btn-dark-pill:focus-visible { outline: 2px solid #c8b183; outline-offset: 3px; }
+  .btn-dark-pill__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 999px;
+    background: #fdfcfa;
+    color: #1b1a17;
+    transition: transform 0.45s cubic-bezier(.16,1,.3,1);
+  }
+  .btn-dark-pill:hover .btn-dark-pill__arrow { transform: rotate(45deg); }
+</style>
+</head>
+
+<body class="bg-paper text-heading antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50 sticky-nav" id="siteNav">
+  <div class="max-w-content mx-auto px-6 md:px-8">
+    <div class="flex items-center justify-between py-5 md:py-6 gap-4">
+
+      <a href="#hero" class="flex items-center gap-2.5 shrink-0 group">
+        <svg width="30" height="30" viewBox="0 0 100 100" class="text-heading/70 group-hover:text-goldDeep transition-colors duration-300">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/>
+          <text x="50" y="61" text-anchor="middle" class="mono-mark" fill="currentColor">LA</text>
+        </svg>
+        <span class="leading-none">
+          <span class="block text-heading font-bold tracking-[0.12em] text-sm">LUCKY ALIEN</span>
+          <span class="block text-body/70 text-[9px] tracking-[0.26em] mt-1">PAPILLONS</span>
+        </span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-1 bg-white rounded-full p-1.5 shadow-[0_2px_10px_-4px_rgba(27,26,23,0.12)]" id="pillNav">
+        <a href="#hero" class="nav-pill" data-nav-pill data-active="true">Головна</a>
+        <a href="#about" class="nav-pill" data-nav-pill>Про нас</a>
+        <a href="#breeding" class="nav-pill" data-nav-pill>Плідники</a>
+        <a href="#puppies" class="nav-pill" data-nav-pill>Цуценята</a>
+        <a href="#contact" class="nav-pill" data-nav-pill>Контакти</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-4">
+        <div class="flex items-center gap-2 text-[11px]">
+          <span class="lang-item" data-active="true">UA</span>
+          <span class="text-heading/15">·</span>
+          <span class="lang-item" data-active="false" title="Скоро">RU</span>
+          <span class="text-heading/15">·</span>
+          <span class="lang-item" data-active="false" title="Скоро">EN</span>
+          <span class="text-heading/15">·</span>
+          <span class="lang-item" data-active="false" title="Скоро">RO</span>
+        </div>
+        <span class="w-px h-4 bg-heading/10"></span>
+        <a href="https://instagram.com/basenjlucky" target="_blank" rel="noopener" aria-label="Instagram" class="text-heading/70 hover:text-goldDeep transition-colors duration-300">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="https://facebook.com/nadiya.iovcheva" target="_blank" rel="noopener" aria-label="Facebook" class="text-heading/70 hover:text-goldDeep transition-colors duration-300">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.6c0-.9.3-1.6 1.7-1.6h1.5V3.1C15.9 3 15 2.9 13.9 2.9c-2.4 0-4 1.5-4 4.2v2.7H7.2V13h2.7v8h3.6z"/></svg>
+        </a>
+      </div>
+
+      <button id="menuBtn" class="lg:hidden text-heading p-2 -mr-2" aria-label="Меню" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="lg:hidden hidden border-t border-heading/10 bg-paper/98">
+    <div class="px-6 py-6 flex flex-col gap-5 text-heading text-sm font-semibold uppercase tracking-wide">
+      <a href="#hero" class="mobile-link">Головна</a>
+      <a href="#about" class="mobile-link">Про нас</a>
+      <a href="#breeding" class="mobile-link">Плідники</a>
+      <a href="#puppies" class="mobile-link">Цуценята</a>
+      <a href="#contact" class="mobile-link">Контакти</a>
+      <div class="flex items-center gap-2 pt-2 text-[11px] normal-case font-normal">
+        <span class="lang-item" data-active="true">UA</span>
+        <span class="text-heading/15">·</span>
+        <span class="lang-item" data-active="false">RU</span>
+        <span class="text-heading/15">·</span>
+        <span class="lang-item" data-active="false">EN</span>
+        <span class="text-heading/15">·</span>
+        <span class="lang-item" data-active="false">RO</span>
+      </div>
+      <div class="flex items-center gap-3 text-[11px] normal-case font-normal">
+        <a href="https://instagram.com/basenjlucky" target="_blank" rel="noopener" aria-label="Instagram" class="text-heading/70"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://facebook.com/nadiya.iovcheva" target="_blank" rel="noopener" aria-label="Facebook" class="text-heading/70"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.6c0-.9.3-1.6 1.7-1.6h1.5V3.1C15.9 3 15 2.9 13.9 2.9c-2.4 0-4 1.5-4 4.2v2.7H7.2V13h2.7v8h3.6z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="hero" class="relative bg-paper pt-24 pb-14 md:pt-32 md:pb-20">
+  <div class="max-w-content mx-auto px-6 md:px-8">
+    <div class="reveal is-visible relative rounded-[2rem] md:rounded-[2.5rem] bg-sand overflow-hidden flex flex-col md:flex-row md:min-h-[600px] lg:min-h-[660px]">
+
+      <div class="relative z-10 order-2 md:order-1 md:w-[36%] shrink-0 px-7 py-9 sm:px-10 sm:py-11 md:p-12 lg:p-14 flex flex-col justify-center">
+        <h1 class="text-[2rem] sm:text-4xl md:text-[2.4rem] lg:text-[2.65rem] font-bold text-heading leading-[1.12] tracking-tight mb-5">
+          Папійон приносить<br>щастя в дім
+        </h1>
+        <p class="text-body text-sm md:text-[15px] leading-relaxed mb-8 max-w-sm">
+          Розплідник континентального той-спанієля – папійона. Плідники з родоводом FCI, цуценята – у добрі руки по всьому світу.
+        </p>
+        <a href="#puppies" class="btn-dark-pill w-fit">
+          Доступні цуценята
+          <span class="btn-dark-pill__arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="relative order-1 md:order-2 md:flex-1 h-64 sm:h-80 md:h-auto">
+        <img src="assets/img/hero-papillon.jpg" alt="Цуценя папійона Lucky Alien" class="absolute inset-0 w-full h-full object-cover object-[62%_28%]">
+        <div class="absolute bottom-5 right-5 md:bottom-7 md:right-7 z-10 bg-paper/92 backdrop-blur px-4 py-2.5 rounded-full flex items-center gap-2 shadow-[0_10px_24px_-10px_rgba(27,26,23,0.35)]">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-goldDeep" stroke-width="1.8"><path d="M12 2 15 8.5 22 9.3 17 14 18.3 21 12 17.6 5.7 21 7 14 2 9.3 9 8.5 12 2Z"/></svg>
+          <span class="text-heading text-xs font-semibold whitespace-nowrap">FCI · з 2017 року</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS STRIP ============ -->
+<section class="relative bg-paper py-16 md:py-28 lg:py-36 overflow-hidden">
+
+  <img src="assets/img/credential-1.jpg" alt="Цуценя папійона Lucky Alien у светрі" class="corner-photo hidden lg:block left-[4%] top-[8%] -rotate-6">
+  <img src="assets/img/credential-3.jpg" alt="Плідник Lucky Alien, портрет" class="corner-photo hidden lg:block right-[5%] top-[2%] rotate-6">
+  <img src="assets/img/credential-2.jpg" alt="Цуценя папійона Lucky Alien, портрет" class="corner-photo hidden lg:block left-[9%] bottom-[4%] -rotate-3">
+  <img src="assets/img/credential-4.jpg" alt="Усміхнене цуценя папійона Lucky Alien" class="corner-photo hidden lg:block right-[9%] bottom-[8%] rotate-3">
+
+  <div class="relative z-10 max-w-3xl mx-auto px-6 md:px-8 text-center reveal" data-reveal>
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-goldDeep text-paper shadow-[0_14px_28px_-12px_rgba(164,133,79,0.55)]">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16.2" rx="5" ry="4.1"/><ellipse cx="4.8" cy="9.2" rx="2.2" ry="2.8"/><ellipse cx="9.8" cy="5.2" rx="2.2" ry="2.8"/><ellipse cx="14.7" cy="5.4" rx="2.2" ry="2.7"/><ellipse cx="19.1" cy="9.6" rx="2" ry="2.6"/></svg>
+    </span>
+    <p class="mt-7 text-heading font-bold text-2xl sm:text-3xl md:text-[2.35rem] leading-[1.35] tracking-tight">
+      Цуценята нашого розплідника<br>
+      мають родовід FCI та ветпаспорт<br>
+      – чіповані, вакциновані й<br>
+      народжені від здорових,<br>
+      генетично протестованих батьків
+    </p>
+    <p class="mt-7 text-body/60 text-xs font-semibold tracking-[0.3em] uppercase">З 2017 року</p>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="relative bg-paper pb-4">
+  <div class="max-w-content mx-auto px-6 md:px-8">
+
+    <!-- ===== MOBILE: simple stacked fallback (no scroll-pin) ===== -->
+    <div class="md:hidden">
+      <!-- block 1 -->
+      <div class="reveal" data-reveal>
+        <p class="font-script text-gold text-3xl mb-4">Про нас</p>
+        <h2 class="text-3xl font-semibold text-heading tracking-tight mb-6">Мрія, що стала реальністю</h2>
+        <div class="space-y-5 text-body text-[15px] leading-[1.8]">
+          <p>Наша історія почалася не 2017 року, коли розплідник отримав офіційну реєстрацію, а значно раніше – ще у <strong class="text-heading font-semibold">80-х роках минулого століття</strong>. Тоді маленька дівчинка могла годинами стояти біля вітрини книгарні, розглядаючи яскраві листівки з породистими собаками. Та найбільше захоплення в ній викликали саме вони – граційні <strong class="text-heading font-semibold">«собаки-метелики»</strong> з дивовижними вушками й розумними, глибокими очима. Ця дитяча мрія проросла крізь роки, щоб одного дня втілитися в життя.</p>
+          <p>Першим кроком на цьому шляху стала поява в домі нашого першого «метелика» – донечки чудового кобеля, <strong class="text-heading font-semibold">імпортованого з Німеччини</strong>. З її появою дім миттєво наповнився легким елегантним шармом, драйвом і <strong class="text-heading font-semibold">безумовною любов'ю</strong>.</p>
+        </div>
+        <div class="img-frame rounded-[1.5rem] overflow-hidden mt-8 h-64">
+          <img src="assets/img/about-1.jpg" alt="Папійон Lucky Alien" class="w-full h-full object-cover object-[50%_18%]">
+        </div>
+      </div>
+
+      <div class="my-14">
+        <svg class="wave" viewBox="0 0 1200 90" preserveAspectRatio="none">
+          <path d="M0,45 C150,110 300,-20 450,45 C600,110 750,-20 900,45 C1000,85 1100,10 1200,45" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <!-- block 2 -->
+      <div class="reveal" data-reveal>
+        <p class="font-script text-gold text-3xl mb-4">Наш підхід</p>
+        <h2 class="text-3xl font-semibold text-heading tracking-tight mb-6">Здоров'я, стандарт, характер</h2>
+        <p class="text-body text-[15px] leading-[1.8] mb-8">
+          Ми щиро переконані: ідеальний папійон – це гармонія зовнішньої грації, міцного здоров'я
+          та життєрадісного характеру. Тому в роботі ми дотримуємось суворих стандартів.
+        </p>
+        <div class="img-frame rounded-[1.5rem] overflow-hidden mb-8 h-64">
+          <img src="assets/img/breeding-female.jpg" alt="Плідник Lucky Alien на виставковій стійці" class="w-full h-full object-cover">
+        </div>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-7">
+          <div>
+            <p class="text-heading font-semibold text-sm mb-2">Здоров'я насамперед</p>
+            <p class="text-body text-[13.5px] leading-relaxed">Обов'язкове генетичне тестування, зокрема на PRA та NAD.</p>
+          </div>
+          <div>
+            <p class="text-heading font-semibold text-sm mb-2">Виставкові успіхи</p>
+            <p class="text-body text-[13.5px] leading-relaxed">Титули Чемпіонів та Інтерчемпіонів на виставках.</p>
+          </div>
+          <div class="col-span-2">
+            <p class="text-heading font-semibold text-sm mb-2">Активне життя</p>
+            <p class="text-body text-[13.5px] leading-relaxed">Не прикраса дивана, а партнер: наші собаки залюбки займаються аджиліті.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-14">
+        <svg class="wave text-gold" viewBox="0 0 1200 90" preserveAspectRatio="none">
+          <path d="M0,45 C150,-20 300,110 450,45 C600,-20 750,110 900,45 C1000,10 1100,85 1200,45" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <!-- block 3 -->
+      <div class="reveal pb-16" data-reveal>
+        <p class="font-script text-gold text-3xl mb-4">Більше, ніж просто собака</p>
+        <h2 class="text-3xl font-semibold text-heading tracking-tight mb-6">Повноправні члени родини</h2>
+        <div class="img-frame rounded-[1.5rem] overflow-hidden mb-8 h-64">
+          <img src="assets/img/about-3.jpg" alt="Папійон Lucky Alien як член родини" class="w-full h-full object-cover object-[50%_20%]">
+        </div>
+        <div class="space-y-5 text-body text-[15px] leading-[1.8]">
+          <p><strong class="text-heading font-semibold">Головна гордість</strong> нашого розплідника – формат утримання собак. У нас <strong class="text-heading font-semibold">немає вольєрів і кліток</strong>. Усі наші папійони живуть разом із нами вдома, діляться нашим побутом, ростуть <strong class="text-heading font-semibold">вихованими, соціалізованими й контактними</strong>. Вони з захватом супроводжують нас в автомобільних подорожах, заміських прогулянках і будь-яких сімейних пригодах.</p>
+          <p>Ми віримо: цуценя папійона – це <strong class="text-heading font-semibold">маленьке крилате щастя</strong>. І наша мета – передати це щастя у ваші руки: <strong class="text-heading font-semibold">здоровим, доглянутим, контактним і безмежно відкритим до світу</strong>.</p>
+        </div>
+        <p class="font-script text-gold text-3xl mt-8">Папійон приносить щастя в дім</p>
+      </div>
+    </div>
+
+    <!-- ===== DESKTOP: pinned scroll animation – text crossfades left, photos overlap-swap right ===== -->
+    <div class="hidden md:block relative about-track" id="aboutTrack">
+      <div class="sticky top-24 h-[calc(100vh-6rem)] flex items-center">
+      <div class="grid grid-cols-2 gap-16 items-center w-full">
+
+        <div class="relative h-[620px] sm:h-[560px] lg:h-[440px]" id="aboutTextBox">
+
+          <div class="about-step-text" data-about-text="0" data-active="true">
+            <p class="font-script text-gold text-4xl mb-4">Про нас</p>
+            <h2 class="text-4xl font-semibold text-heading tracking-tight mb-6">Мрія, що стала реальністю</h2>
+            <div class="space-y-4 text-body text-[14.5px] leading-[1.75] max-w-lg">
+              <p>Наша історія почалася не 2017 року, коли розплідник отримав офіційну реєстрацію, а значно раніше – ще у <strong class="text-heading font-semibold">80-х роках минулого століття</strong>. Тоді маленька дівчинка могла годинами стояти біля вітрини книгарні, розглядаючи яскраві листівки з породистими собаками. Та найбільше захоплення в ній викликали саме вони – граційні <strong class="text-heading font-semibold">«собаки-метелики»</strong> з дивовижними вушками й розумними, глибокими очима.</p>
+              <p>Першим кроком на цьому шляху стала поява в домі нашого першого «метелика» – донечки чудового кобеля, <strong class="text-heading font-semibold">імпортованого з Німеччини</strong>. З її появою дім миттєво наповнився легким елегантним шармом, драйвом і <strong class="text-heading font-semibold">безумовною любов'ю</strong>.</p>
+            </div>
+          </div>
+
+          <div class="about-step-text" data-about-text="1">
+            <p class="font-script text-gold text-4xl mb-4">Наш підхід</p>
+            <h2 class="text-4xl font-semibold text-heading tracking-tight mb-6">Здоров'я, стандарт, характер</h2>
+            <p class="text-body text-[14.5px] leading-[1.75] max-w-lg mb-8">
+              Ми щиро переконані: ідеальний папійон – це гармонія зовнішньої грації, міцного здоров'я
+              та життєрадісного характеру. Тому в роботі ми дотримуємось суворих стандартів.
+            </p>
+            <div class="grid grid-cols-3 gap-5 max-w-lg">
+              <div>
+                <p class="text-heading font-semibold text-sm mb-2">Здоров'я насамперед</p>
+                <p class="text-body text-[13px] leading-relaxed">Обов'язкове генетичне тестування, зокрема на PRA та NAD.</p>
+              </div>
+              <div>
+                <p class="text-heading font-semibold text-sm mb-2">Виставкові успіхи</p>
+                <p class="text-body text-[13px] leading-relaxed">Титули Чемпіонів та Інтерчемпіонів на виставках.</p>
+              </div>
+              <div>
+                <p class="text-heading font-semibold text-sm mb-2">Активне життя</p>
+                <p class="text-body text-[13px] leading-relaxed">Не прикраса дивана, а партнер: наші собаки займаються аджиліті.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-step-text" data-about-text="2">
+            <p class="font-script text-gold text-4xl mb-4">Більше, ніж просто собака</p>
+            <h2 class="text-4xl font-semibold text-heading tracking-tight mb-6">Повноправні члени родини</h2>
+            <div class="space-y-4 text-body text-[14.5px] leading-[1.75] max-w-lg">
+              <p><strong class="text-heading font-semibold">Головна гордість</strong> нашого розплідника – формат утримання собак. У нас <strong class="text-heading font-semibold">немає вольєрів і кліток</strong>. Усі наші папійони живуть разом із нами вдома, діляться нашим побутом, ростуть <strong class="text-heading font-semibold">вихованими, соціалізованими й контактними</strong>. Вони з захватом супроводжують нас в автомобільних подорожах, заміських прогулянках і будь-яких сімейних пригодах.</p>
+              <p>Ми віримо: цуценя папійона – це <strong class="text-heading font-semibold">маленьке крилате щастя</strong>. І наша мета – передати це щастя у ваші руки: <strong class="text-heading font-semibold">здоровим, доглянутим, контактним і безмежно відкритим до світу</strong>.</p>
+            </div>
+            <p class="font-script text-gold text-3xl mt-6">Папійон приносить щастя в дім</p>
+          </div>
+
+        </div>
+
+        <div class="relative h-[620px] sm:h-[560px] lg:h-[560px] rounded-[2rem] overflow-hidden bg-sand" id="aboutImgBox">
+          <div class="about-step-img" data-about-img="0" data-state="active">
+            <img src="assets/img/about-1.jpg" alt="Папійон Lucky Alien на прогулянці" class="w-full h-full object-cover object-[50%_18%]">
+          </div>
+          <div class="about-step-img" data-about-img="1" data-state="upcoming">
+            <img src="assets/img/breeding-female.jpg" alt="Плідник Lucky Alien на виставковій стійці" class="w-full h-full object-cover">
+          </div>
+          <div class="about-step-img" data-about-img="2" data-state="upcoming">
+            <img src="assets/img/about-3.jpg" alt="Папійон Lucky Alien як член родини" class="w-full h-full object-cover object-[50%_20%]">
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ BREEDING DOGS ============ -->
+<section id="breeding" class="relative bg-[#f7f4ee] py-24 md:py-32">
+  <div class="max-w-content mx-auto px-6 md:px-8">
+    <div class="text-center max-w-xl mx-auto mb-16 reveal" data-reveal>
+      <p class="font-script text-gold text-3xl md:text-4xl mb-2">Познайомтесь</p>
+      <h2 class="text-3xl md:text-4xl font-semibold text-heading tracking-tight mb-5">Наші плідники</h2>
+      <p class="text-body text-[15px] leading-relaxed">
+        Ми пишаємося тим, що наші виробники поєднують виставкову грацію, міцне здоров'я та лагідний
+        характер. Кожен плідний собака проходить обов'язкове генетичне тестування.
+      </p>
+    </div>
+
+    <div class="card-elevated grid md:grid-cols-2 overflow-hidden reveal" data-reveal>
+      <div class="img-frame h-72 md:h-auto">
+        <img src="assets/img/breeding-female.jpg" alt="Zvezdny Alliance Fantastic Style – плідна сука Lucky Alien" class="w-full h-full object-cover">
+      </div>
+      <div class="p-8 md:p-12 flex flex-col justify-center">
+        <span class="chip w-fit mb-5">Плідна сука</span>
+        <h3 class="text-2xl md:text-3xl font-semibold text-heading mb-1">Zvezdny Alliance Fantastic Style</h3>
+        <p class="text-body text-sm mb-7">Мати нинішнього посліду Lucky Alien</p>
+
+        <p class="text-heading/70 text-xs font-bold uppercase tracking-[0.14em] mb-3">Титули</p>
+        <ul class="text-body text-[14px] leading-relaxed mb-8 space-y-1.5">
+          <li class="flex gap-2"><span class="text-gold">—</span>Інтерчемпіон</li>
+          <li class="flex gap-2"><span class="text-gold">—</span>Юний Чемпіон Румунії</li>
+          <li class="flex gap-2"><span class="text-gold">—</span>Чемпіон і Гранд-чемпіон Болгарії, Румунії та Молдови</li>
+          <li class="flex gap-2"><span class="text-gold">—</span>Best of Best in Breed, Молдова</li>
+        </ul>
+
+        <p class="text-heading/70 text-xs font-bold uppercase tracking-[0.14em] mb-3">Генетичне здоров'я</p>
+        <div class="flex flex-wrap gap-2 mb-9">
+          <span class="chip">DM-2 N/N</span>
+          <span class="chip">Factor VII N/N-FVII</span>
+          <span class="chip">NAD N/N</span>
+          <span class="chip">vWD-1 N/N</span>
+          <span class="chip">PAP_PRA – очікується</span>
+        </div>
+
+        <a href="#contact" class="btn-pill btn-outline-gold w-fit">Дізнатись більше</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PUPPIES ============ -->
+<section id="puppies" class="relative bg-paper py-24 md:py-32">
+  <div class="max-w-content mx-auto px-6 md:px-8">
+    <div class="text-center max-w-xl mx-auto mb-16 reveal" data-reveal>
+      <p class="font-script text-gold text-3xl md:text-4xl mb-2">Дізнайтесь більше</p>
+      <h2 class="text-3xl md:text-4xl font-semibold text-heading tracking-tight mb-5">Цуценята в добрі руки</h2>
+      <p class="text-body text-[15px] leading-relaxed">
+        Запрошуємо познайомитися з цуценятами нашого розплідника – усі малюки виростають вдома,
+        серед родини, соціалізовані та готові подорожувати світом.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 md:gap-10">
+
+      <div class="card-elevated overflow-hidden reveal" data-reveal>
+        <div class="img-frame h-80">
+          <img src="assets/img/puppy-roblox.jpg" alt="Lucky Alien Roblox – цуценя папійона шукає дім" class="w-full h-full object-cover object-[50%_15%]">
+        </div>
+        <div class="p-7 md:p-9">
+          <div class="flex items-center justify-between gap-3 mb-4">
+            <span class="chip">Хлопчик · шукає дім</span>
+            <span class="text-body text-xs">Народився 12.10.2025</span>
+          </div>
+          <h3 class="text-xl md:text-2xl font-semibold text-heading mb-4">Lucky Alien Roblox</h3>
+          <ul class="text-body text-[13.5px] leading-relaxed space-y-1.5 mb-6">
+            <li class="flex gap-2"><span class="text-gold">—</span>Родовід FCI та ветеринарний паспорт ЄС</li>
+            <li class="flex gap-2"><span class="text-gold">—</span>Чіпований, вакцинований і оброблений від паразитів</li>
+            <li class="flex gap-2"><span class="text-gold">—</span>Від повністю здорових, генетично протестованих батьків</li>
+          </ul>
+          <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 pt-5 border-t border-heading/10">
+            <span class="text-heading font-semibold whitespace-nowrap">€1500 – €2500</span>
+            <a href="#contact" class="btn-pill btn-outline-gold">Запитати</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-elevated overflow-hidden reveal reveal-delay-1" data-reveal>
+        <div class="img-frame h-80">
+          <img src="assets/img/puppy-litter.jpg" alt="Новий послід папійонів Lucky Alien" class="w-full h-full object-cover object-[35%_25%]">
+        </div>
+        <div class="p-7 md:p-9">
+          <div class="flex items-center justify-between gap-3 mb-4">
+            <span class="chip">4 хлопчики · новий послід</span>
+            <span class="text-body text-xs">Народились 12.10.2025</span>
+          </div>
+          <h3 class="text-xl md:text-2xl font-semibold text-heading mb-4">Новий послід Lucky Alien</h3>
+          <ul class="text-body text-[13.5px] leading-relaxed space-y-1.5 mb-6">
+            <li class="flex gap-2"><span class="text-gold">—</span>Батько: Fashion Rid Keeper of My Soul</li>
+            <li class="flex gap-2"><span class="text-gold">—</span>Матір: Zvezdny Alliance Fantastic Style</li>
+            <li class="flex gap-2"><span class="text-gold">—</span>Від повністю здорових, генетично протестованих батьків</li>
+          </ul>
+          <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 pt-5 border-t border-heading/10">
+            <span class="text-heading font-semibold whitespace-nowrap">€1500 – €2500</span>
+            <a href="#contact" class="btn-pill btn-outline-gold">Забронювати</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="relative bg-paper py-20 md:py-28 lg:py-32 overflow-hidden">
+  <div class="max-w-content mx-auto px-6 md:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+      <div class="reveal tilt-card bg-white rounded-[1.75rem] p-7 sm:p-10 md:p-12" data-reveal>
+        <form class="grid gap-6" onsubmit="return false">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="field-label">Ім'я</label>
+              <input class="field-light" type="text" placeholder="Ваше ім'я" name="first_name">
+            </div>
+            <div>
+              <label class="field-label">Прізвище</label>
+              <input class="field-light" type="text" placeholder="Ваше прізвище" name="last_name">
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="field-label">Email</label>
+              <input class="field-light" type="email" placeholder="you@email.com" name="email">
+            </div>
+            <div>
+              <label class="field-label">Телефон</label>
+              <input class="field-light" type="tel" placeholder="+380" name="phone">
+            </div>
+          </div>
+          <div>
+            <label class="field-label">Повідомлення</label>
+            <textarea class="field-light" rows="4" name="message" placeholder="Розкажіть, яке цуценя вас цікавить"></textarea>
+          </div>
+          <button type="button" class="btn-pill btn-gold-solid w-fit mt-2">Надіслати</button>
+        </form>
+      </div>
+
+      <div class="reveal reveal-delay-1" data-reveal>
+        <h2 class="text-3xl sm:text-4xl md:text-[2.7rem] font-bold text-heading tracking-tight leading-[1.18] mb-6">
+          Забронюйте
+          <span class="inline-flex items-center justify-center w-11 h-11 md:w-14 md:h-14 rounded-full bg-goldPale text-goldDeep align-middle mx-1">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16.2" rx="5" ry="4.1"/><ellipse cx="4.8" cy="9.2" rx="2.2" ry="2.8"/><ellipse cx="9.8" cy="5.2" rx="2.2" ry="2.8"/><ellipse cx="14.7" cy="5.4" rx="2.2" ry="2.7"/><ellipse cx="19.1" cy="9.6" rx="2" ry="2.6"/></svg>
+          </span>
+          <br class="hidden sm:block">
+          <span class="relative inline-block">
+            цуценя
+            <svg class="absolute left-0 -bottom-1.5 w-full h-3 text-gold" viewBox="0 0 120 20" preserveAspectRatio="none"><path d="M2,10 C20,2 30,18 50,10 C70,2 80,18 100,10 C110,6 115,14 118,10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          </span>
+        </h2>
+        <p class="text-body text-[15px] leading-relaxed max-w-md mb-10">
+          Залиште заявку – ми зв'яжемось з вами протягом дня, розповімо про цуценят і відповімо на всі запитання.
+        </p>
+
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <span class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <span class="text-heading font-medium">Україна · Румунія</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+            </span>
+            <a href="mailto:info@luckyalien-kennel.com" class="text-heading font-medium hover:text-goldDeep transition-colors duration-300">info@luckyalien-kennel.com</a>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <a href="tel:+380503210192" class="text-heading font-medium hover:text-goldDeep transition-colors duration-300">+380 50 321 0192 · +40 765 312 193</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal reveal-delay-2 mt-16 md:mt-24 flex flex-wrap items-center justify-center gap-x-4 gap-y-4 text-heading/65 text-xs sm:text-[13px] font-semibold uppercase tracking-wide" data-reveal>
+      <span>З 2017 року</span>
+      <span class="trust-dot"></span>
+      <span>Родовід FCI</span>
+      <span class="trust-dot"></span>
+      <span>Генетично протестовані плідники</span>
+      <span class="trust-dot"></span>
+      <span>Україна · Румунія</span>
+      <span class="trust-dot"></span>
+      <span>Доставка у весь світ</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative bg-ink grain overflow-hidden pt-20 pb-8">
+  <svg class="absolute -bottom-32 -left-32 w-[38rem] opacity-[0.05] pointer-events-none" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="46" stroke="#c8b183" stroke-width="1"/>
+    <text x="50" y="63" text-anchor="middle" class="mono-mark" fill="#c8b183">LA</text>
+  </svg>
+
+  <div class="relative max-w-content mx-auto px-6 md:px-8">
+    <div class="grid md:grid-cols-[1.4fr_1fr_1fr] gap-10 md:gap-8 pb-14 border-b border-white/10">
+      <div class="flex items-center gap-3">
+        <svg width="40" height="40" viewBox="0 0 100 100" class="text-goldPale/50 shrink-0">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/>
+          <text x="50" y="61" text-anchor="middle" class="mono-mark" fill="currentColor">LA</text>
+        </svg>
+        <span class="leading-none">
+          <span class="block text-white font-bold tracking-[0.14em] text-base">LUCKY ALIEN</span>
+          <span class="block text-goldPale/60 text-xs tracking-[0.28em] mt-1">PAPILLONS</span>
+        </span>
+      </div>
+
+      <div>
+        <p class="text-goldPale/70 text-xs font-bold uppercase tracking-[0.16em] mb-4">Адреса</p>
+        <p class="text-white/60 text-sm leading-relaxed">Україна · Румунія<br>Доставка цуценят по всьому світу</p>
+      </div>
+
+      <div>
+        <p class="text-goldPale/70 text-xs font-bold uppercase tracking-[0.16em] mb-4">Контакти</p>
+        <div class="space-y-2.5 text-white/60 text-sm">
+          <a href="tel:+380503210192" class="flex items-center gap-2.5 hover:text-gold transition-colors duration-300 w-fit">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +380 50 321 0192
+          </a>
+          <a href="tel:+40765312193" class="flex items-center gap-2.5 hover:text-gold transition-colors duration-300 w-fit">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +40 765 312 193
+          </a>
+          <a href="mailto:info@luckyalien-kennel.com" class="flex items-center gap-2.5 hover:text-gold transition-colors duration-300 w-fit">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+            info@luckyalien-kennel.com
+          </a>
+          <div class="flex items-center gap-3 pt-1">
+            <a href="https://instagram.com/basenjlucky" target="_blank" rel="noopener" class="social-icon !w-9 !h-9" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            </a>
+            <a href="https://facebook.com/nadiya.iovcheva" target="_blank" rel="noopener" class="social-icon !w-9 !h-9" aria-label="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.6c0-.9.3-1.6 1.7-1.6h1.5V3.1C15.9 3 15 2.9 13.9 2.9c-2.4 0-4 1.5-4 4.2v2.7H7.2V13h2.7v8h3.6z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-7 text-white/35 text-xs">
+      <p>Lucky Alien © 2026</p>
+      <p>Сайт українською · інші мови незабаром</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky nav shadow + mobile menu
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!open));
+  });
+  document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('[data-reveal]').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+
+  // nav pill scroll-spy
+  const navPills = document.querySelectorAll('[data-nav-pill]');
+  const spySections = ['hero', 'about', 'breeding', 'puppies', 'contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const href = '#' + e.target.id;
+      navPills.forEach(p => p.setAttribute('data-active', String(p.getAttribute('href') === href)));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  spySections.forEach(s => spy.observe(s));
+
+  // About section: pinned scroll-driven step swap
+  (function () {
+    const track = document.getElementById('aboutTrack');
+    if (!track) return;
+    const textSteps = document.querySelectorAll('[data-about-text]');
+    const imgSteps = document.querySelectorAll('[data-about-img]');
+    const mq = window.matchMedia('(min-width: 768px)');
+    let current = 0;
+
+    function setActive(i) {
+      current = i;
+      textSteps.forEach(el => el.setAttribute('data-active', String(Number(el.dataset.aboutText) === i)));
+      imgSteps.forEach(el => {
+        const idx = Number(el.dataset.aboutImg);
+        el.setAttribute('data-state', idx === i ? 'active' : (idx < i ? 'past' : 'upcoming'));
+      });
+    }
+
+    function onScroll() {
+      if (!mq.matches) return;
+      const rect = track.getBoundingClientRect();
+      const total = track.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      const progress = total > 0 ? scrolled / total : 0;
+      const step = Math.min(2, Math.floor(progress * 3));
+      if (step !== current) setActive(step);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+
+    // size the pinned columns to fit the tallest step's real content,
+    // instead of a guessed fixed height that clips text on narrower screens
+    const textBox = document.getElementById('aboutTextBox');
+    const imgBox = document.getElementById('aboutImgBox');
+    function syncHeights() {
+      if (!textBox || !imgBox) return;
+      if (!mq.matches) { textBox.style.height = ''; imgBox.style.height = ''; return; }
+      const max = Math.max(...[...textSteps].map(el => el.scrollHeight));
+      textBox.style.height = max + 'px';
+      imgBox.style.height = max + 'px';
+    }
+    let resizeTimer;
+    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(syncHeights, 120); });
+    window.addEventListener('load', syncHeights);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncHeights);
+    syncHeights();
+  })();
+</script>
+
+</body>
+</html>
