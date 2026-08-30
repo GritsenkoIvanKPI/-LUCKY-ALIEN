@@ -8,13 +8,22 @@ the breeders, and the puppies available, for a worldwide audience.
 - Ukrainian — build now (only language in this pass)
 - Russian, English, Romanian — to be added later (out of scope for now)
 
-## Site structure (final — do not add/remove sections)
-1. Navigation
+## Site structure (as of the August 2026 full overhaul)
+1. Navigation (8 pills: Головна · Про нас · Плідники · Цуценята · Новини · Відгуки · Порода · Контакти)
 2. Hero
-3. About the kennel ("Про нас")
-4. Breeding dogs ("Плідники")
-5. Puppies ("Цуценята")
-6. Contact ("Контакти")
+3. Credentials strip
+4. About the kennel ("Про нас")
+5. Breeding dogs ("Плідники") + "Ми рекомендуємо" closing gallery + one-line Basenji mention
+6. Show news ("Новини") — dated achievement timeline
+7. Puppies mega-section ("Цуценята") — 5 in-page sub-sections with jump pills:
+   Про цуценят · Зараз доступні · Відео · Догляд · Ціни
+8. How to reserve a puppy ("Як забронювати цуценя") — Заявка / Завдаток / Договір, 3 steps
+9. Reviews ("Відгуки")
+10. Before you arrive ("Перед тим як забрати цуценя")
+11. FAQ ("Питання")
+12. About the Papillon breed ("Про породу папійон")
+13. Contact ("Контакти")
+14. Footer — real logo, certificate photo, updated address
 
 ## Reference design
 `desktop.png` — an English kennel site ("Lalabay"), light theme with a dark hero/footer/contact
@@ -73,3 +82,49 @@ No backend. Build the form UI to match the reference visually; no submit handler
 - Pricing: show €1500–€2500 range
 - Email: placeholder, to be swapped later
 - Form: static UI only, no submit logic
+
+## August 2026 overhaul — new facts discovered in `Кінологія 2/`
+- **The kennel breeds both Basenji and Papillon** (real logo, 3 of 4 show-news graphics, and the
+  Instagram handle `basenjlucky` are all Basenji). **Client decision: keep the site Papillon-only**
+  for the main product content (Breeding dogs, Puppies, Breed info), with a single sentence in the
+  Breeding section noting a dedicated Basenji section is coming.
+  **Update:** the client later explicitly asked for the Новини (Show news) section to become a
+  photo blog using the real graphics in `Кінологія 2/Новини шоу/` — 3 of those 4 real photos are
+  Basenji achievements, so the News blog now legitimately shows Basenji content (clearly tagged
+  "Басенджі" vs "Папійон" on each card), while Breeding/Puppies/Breed sections remain Papillon-only.
+  This is a deliberate, narrower exception (real news reporting, not a full Basenji product line) —
+  don't expand Basenji content further without asking.
+- Real kennel logo now in use everywhere (nav, footer, favicon): `assets/img/logo-dark(-icon).png`
+  (dark line art, transparent bg, for light surfaces) and `logo-light(-icon).png` (pale gold line
+  art, transparent bg, for dark surfaces) — processed from
+  `Кінологія 2/Логотипи + примітки /`. The old "LA" monogram is fully retired.
+- Real city from the UKU/FCI certificate: **Кривий Ріг, Україна**. Owner's full legal name:
+  **Надія Іовчева**. Kennel registration number **427/16**. Certificate photo lives in the footer
+  (`assets/img/certificate.jpg`), per the source folder's own instruction ("place at the end of
+  the site in good quality").
+- 3 real puppy videos now embedded in the Puppies → "Відео" sub-section
+  (`assets/video/puppy-1/2/3.mp4`, poster frames auto-extracted via ffmpeg). These are the
+  kennel's own Instagram-style promo reels (Lucky Alien branding baked into the video itself),
+  not raw candid footage — that's expected/normal, matches how the kennel already presents itself.
+- `Кінологія 2/Випускники/` supplied real photography: 2 candid puppy photos now used in the
+  Breeding section's "Ми рекомендуємо" gallery (`graduate-1.jpg`, `graduate-2.jpg`), and 2 real
+  owner+dog photos powering the Reviews section avatars (`review-1.jpg`, `review-2.jpg`).
+
+## Placeholder content added this pass — flag for client review
+These sections have no real source material yet; written now with safe, non-fabricated content
+per the client's own instruction ("if info missing, write it yourself, we'll amend"). Client should
+review and replace:
+- **Ціни (Price list)**: kept the existing real €1500–2500 range, added an illustrative "what's
+  included" list — client should confirm the list items are accurate.
+- **Завдаток (Deposit)** and **Договір (Contract)** in the "Як забронювати цуценя" section: no real
+  deposit amount/terms or contract sample exists yet. Copy explicitly says these are agreed
+  individually / a contract sample will be added — **do not invent a specific deposit amount or a
+  fabricated contract photo**.
+- **Відгуки (Reviews)**: the 2 testimonial quotes are illustrative, paired with real owner photos
+  but attributed generically ("Власниця цуценяти Lucky Alien") rather than invented names — client
+  should swap in real review text when available.
+- **Догляд за цуценям (Puppy care)** and **Перед тим як забрати цуценя (Before you arrive)**: general,
+  safe, non-kennel-specific advice — fine to keep as-is or let the client personalize further.
+- **Питання (FAQ)**: 5 reasonable, generic Q&A pairs — client may want to add kennel-specific ones.
+- **Про породу папійон (About the breed)**: public breed-standard facts (size, weight, lifespan,
+  coat, history) — not kennel-specific claims, safe to keep as reference content.
