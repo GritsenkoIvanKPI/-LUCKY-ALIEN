@@ -290,16 +290,20 @@
   .sticky-nav.scrolled { background: rgba(253,252,250,0.97); box-shadow: 0 8px 30px -16px rgba(27,26,23,0.18); border-bottom-color: rgba(27,26,23,0.06); }
 
   .nav-pill {
-    padding: 0.6rem 1.15rem;
+    padding: 0.6rem 0.85rem;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: #5b5a56;
     transition: background-color 0.35s cubic-bezier(.16,1,.3,1), color 0.35s cubic-bezier(.16,1,.3,1);
     white-space: nowrap;
+    flex-shrink: 0;
   }
   .nav-pill:hover { color: #1b1a17; }
   .nav-pill[data-active="true"] { background: #1b1a17; color: #fdfcfa; }
+
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
 
   .faq-item {
     background: #ffffff;
@@ -369,15 +373,19 @@
         </span>
       </a>
 
-      <nav class="hidden xl:flex items-center gap-1 bg-white rounded-full p-1.5 shadow-[0_2px_10px_-4px_rgba(27,26,23,0.12)]" id="pillNav">
-        <a href="#hero" class="nav-pill" data-nav-pill data-active="true">Головна</a>
-        <a href="#about" class="nav-pill" data-nav-pill>Про нас</a>
-        <a href="#breeding" class="nav-pill" data-nav-pill>Плідники</a>
-        <a href="#puppies" class="nav-pill" data-nav-pill>Цуценята</a>
-        <a href="#news" class="nav-pill" data-nav-pill>Новини</a>
+      <nav class="hidden xl:flex items-center gap-1 bg-white rounded-full p-1.5 shadow-[0_2px_10px_-4px_rgba(27,26,23,0.12)] overflow-x-auto no-scrollbar max-w-[52vw]" id="pillNav">
+        <a href="#news" class="nav-pill" data-nav-pill data-active="true">Новини</a>
+        <a href="#puppies-available" class="nav-pill" data-nav-pill>На продаж</a>
+        <a href="#puppies-about" class="nav-pill" data-nav-pill>Про цуценят</a>
+        <a href="#puppies-videos" class="nav-pill" data-nav-pill>Відео цуценят</a>
+        <a href="#we-recommend" class="nav-pill" data-nav-pill>Рекомендуємо</a>
+        <a href="#puppies-price" class="nav-pill" data-nav-pill>Ціни</a>
+        <a href="#deposit" class="nav-pill" data-nav-pill>Завдаток</a>
+        <a href="#contract" class="nav-pill" data-nav-pill>Договір</a>
         <a href="#reviews" class="nav-pill" data-nav-pill>Відгуки</a>
-        <a href="#breed" class="nav-pill" data-nav-pill>Порода</a>
-        <a href="#contact" class="nav-pill" data-nav-pill>Контакти</a>
+        <a href="#prepare" class="nav-pill" data-nav-pill>Підготовка</a>
+        <a href="#faq" class="nav-pill" data-nav-pill>Питання</a>
+        <a href="#breed" class="nav-pill" data-nav-pill>Про породу</a>
       </nav>
 
       <div class="hidden md:flex items-center gap-4">
@@ -407,14 +415,18 @@
 
   <div id="mobileMenu" class="xl:hidden hidden border-t border-heading/10 bg-paper/98">
     <div class="px-6 py-6 flex flex-col gap-5 text-heading text-sm font-semibold uppercase tracking-wide">
-      <a href="#hero" class="mobile-link">Головна</a>
-      <a href="#about" class="mobile-link">Про нас</a>
-      <a href="#breeding" class="mobile-link">Плідники</a>
-      <a href="#puppies" class="mobile-link">Цуценята</a>
       <a href="#news" class="mobile-link">Новини</a>
+      <a href="#puppies-available" class="mobile-link">На продаж</a>
+      <a href="#puppies-about" class="mobile-link">Про цуценят</a>
+      <a href="#puppies-videos" class="mobile-link">Відео цуценят</a>
+      <a href="#we-recommend" class="mobile-link">Рекомендуємо</a>
+      <a href="#puppies-price" class="mobile-link">Ціни</a>
+      <a href="#deposit" class="mobile-link">Завдаток</a>
+      <a href="#contract" class="mobile-link">Договір</a>
       <a href="#reviews" class="mobile-link">Відгуки</a>
+      <a href="#prepare" class="mobile-link">Підготовка</a>
+      <a href="#faq" class="mobile-link">Питання</a>
       <a href="#breed" class="mobile-link">Про породу</a>
-      <a href="#contact" class="mobile-link">Контакти</a>
       <div class="flex items-center gap-2 pt-2 text-[11px] normal-case font-normal">
         <span class="lang-item" data-active="true">UA</span>
         <span class="text-heading/15">·</span>
@@ -672,7 +684,7 @@
       </div>
     </div>
 
-    <div class="mt-20 md:mt-28 reveal" data-reveal>
+    <div id="we-recommend" class="scroll-mt-28 mt-20 md:mt-28 reveal" data-reveal>
       <div class="text-center max-w-xl mx-auto mb-10">
         <p class="font-script text-gold text-3xl md:text-4xl mb-2">Ми рекомендуємо</p>
         <h3 class="text-2xl md:text-3xl font-semibold text-heading tracking-tight">Наших собак варто побачити</h3>
@@ -994,7 +1006,7 @@
         <p class="text-body text-[14px] leading-relaxed">Залишаєте заявку через форму нижче й розповідаєте про побажання щодо статі, забарвлення та характеру цуценяти.</p>
       </div>
 
-      <div class="relative card-elevated p-7 md:p-8 reveal reveal-delay-1" data-reveal>
+      <div id="deposit" class="relative scroll-mt-28 card-elevated p-7 md:p-8 reveal reveal-delay-1" data-reveal>
         <span class="relative z-10 flex items-center justify-center w-11 h-11 rounded-full bg-ink text-paper font-semibold mb-5">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6.5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>
         </span>
@@ -1002,7 +1014,7 @@
         <p class="text-body text-[14px] leading-relaxed">Резервуєте обране цуценя завдатком – суму й умови узгоджуємо особисто, і він підтверджує наміри з обох сторін.</p>
       </div>
 
-      <div class="relative card-elevated p-7 md:p-8 reveal reveal-delay-2" data-reveal>
+      <div id="contract" class="relative scroll-mt-28 card-elevated p-7 md:p-8 reveal reveal-delay-2" data-reveal>
         <span class="relative z-10 flex items-center justify-center w-11 h-11 rounded-full bg-ink text-paper font-semibold mb-5">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
         </span>
@@ -1411,7 +1423,7 @@
 
   // nav pill scroll-spy
   const navPills = document.querySelectorAll('[data-nav-pill]');
-  const spySections = ['hero', 'about', 'breeding', 'puppies', 'news', 'reviews', 'breed', 'contact']
+  const spySections = ['news', 'puppies-available', 'puppies-about', 'puppies-videos', 'we-recommend', 'puppies-price', 'deposit', 'contract', 'reviews', 'prepare', 'faq', 'breed']
     .map(id => document.getElementById(id))
     .filter(Boolean);
   const spy = new IntersectionObserver((entries) => {
