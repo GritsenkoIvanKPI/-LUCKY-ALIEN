@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Marck+Script&family=Kaushan+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Marck+Script&family=Kaushan+Script&family=Alex+Brush&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 
@@ -373,21 +373,143 @@
     transition: transform 0.45s cubic-bezier(.16,1,.3,1);
   }
   .btn-dark-pill:hover .btn-dark-pill__arrow { transform: rotate(45deg); }
+  /* ---------- gold wordmark ---------- */
+  .brand { position: relative; display: inline-flex; align-items: center; gap: 0.85rem; border-radius: 0.75rem; outline: none; }
+  .brand:focus-visible { box-shadow: 0 0 0 2px #fdfcfa, 0 0 0 4px #c8b183; }
+  .brand:active .brand__word { transform: scale(0.97); }
+  .brand__icon {
+    width: 58px; aspect-ratio: 960 / 530; flex-shrink: 0;
+    background: linear-gradient(160deg, #f1dca4 0%, #c99a45 38%, #8f6526 62%, #e2c27c 82%, #a57a33 100%);
+    -webkit-mask: url(assets/img/logo-dark-icon.png) center / contain no-repeat;
+            mask: url(assets/img/logo-dark-icon.png) center / contain no-repeat;
+    transition: transform 0.6s cubic-bezier(.16,1,.3,1);
+  }
+  .brand:hover .brand__icon { transform: translateY(-2px) rotate(-3deg); }
+  .brand__word {
+    position: relative; display: flex; flex-direction: column; align-items: center; line-height: 1;
+    padding: 0.15rem 0.6rem 0 0.4rem;
+    transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+    filter: drop-shadow(0 1px 0 rgba(94,63,18,0.25)) drop-shadow(0 4px 6px rgba(164,133,79,0.16));
+  }
+  .gold-text {
+    background: linear-gradient(180deg, #e9cf8f 0%, #c99b47 28%, #8c6020 50%, #b98a3d 66%, #dcb769 82%, #7a521a 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .brand__lucky { font-family: "Alex Brush", cursive; font-size: 2.6rem; margin-bottom: -0.55rem; padding: 0 0.3rem; position: relative; z-index: 1; }
+  .brand__alien { font-family: "Cinzel", serif; font-weight: 700; font-size: 1.32rem; letter-spacing: 0.16em; margin-right: -0.16em; }
+  .brand__tag { font-family: Montserrat, sans-serif; font-size: 7.5px; font-weight: 600; letter-spacing: 0.42em; margin-top: 0.3rem; margin-right: -0.42em; color: #a4854f; }
+  .brand--light .gold-text { background-image: linear-gradient(180deg, #f6e7bd 0%, #e0bd6f 30%, #a8782c 52%, #d8b467 70%, #f0d896 84%, #8a5f1f 100%); }
+  .brand--light .brand__tag { color: rgba(236,223,196,0.6); }
+  .brand--light .brand__word { filter: drop-shadow(0 0 14px rgba(224,189,111,0.28)); }
+  .brand--light:focus-visible { box-shadow: 0 0 0 2px #0e0d0c, 0 0 0 4px #c8b183; }
+
+  .butterfly { position: absolute; pointer-events: none; overflow: visible; animation: bf-drift 6s cubic-bezier(.45,0,.55,1) infinite; }
+  .butterfly .wing { transform-box: view-box; transform-origin: 20px 17px; animation: bf-flap 2.4s cubic-bezier(.45,0,.55,1) infinite; }
+  .butterfly--a { width: 26px; top: -0.35rem; left: -0.35rem; --r: -24deg; transform: rotate(var(--r)); }
+  .butterfly--b { width: 16px; top: 1.85rem; right: -0.55rem; --r: 18deg; transform: rotate(var(--r)); animation-duration: 7.5s; animation-delay: -2s; opacity: 0.85; }
+  .butterfly--b .wing { animation-duration: 1.9s; animation-delay: -0.7s; }
+  .brand:hover .butterfly .wing { animation-duration: 0.5s; }
+  @keyframes bf-flap { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(0.3); } 55% { transform: scaleX(0.3); } }
+  @keyframes bf-drift { 0%, 100% { transform: rotate(var(--r)) translate(0, 0); } 50% { transform: rotate(var(--r)) translate(1px, -3px); } }
+  @media (prefers-reduced-motion: reduce) { .butterfly, .butterfly .wing { animation: none; } }
+  @media (max-width: 767px) {
+    .brand { gap: 0.6rem; }
+    .brand__icon { width: 44px; }
+    .brand__lucky { font-size: 2.1rem; margin-bottom: -0.45rem; }
+    .brand__alien { font-size: 1.05rem; }
+    .brand__tag { display: none; }
+    .butterfly--a { width: 21px; }
+    .butterfly--b { width: 13px; top: 1.3rem; }
+  }
+  /* ---------- R litter ---------- */
+  .litter-poster {
+    border-radius: 1.75rem; overflow: hidden; background: #0e0d0c; aspect-ratio: 680 / 464;
+    box-shadow: 0 2px 4px rgba(27,26,23,0.05), 0 30px 60px -28px rgba(20,90,100,0.35);
+  }
+  @media (min-width: 1024px) { .litter-poster { aspect-ratio: auto; min-height: 100%; } }
+  .litter-tile { display: flex; flex-direction: column; gap: 0.85rem; margin: 0; border-radius: 1.5rem; outline: none; }
+  .litter-tile__media {
+    position: relative; aspect-ratio: 4 / 5; border-radius: 1.5rem; overflow: hidden; background: #ecdfc2;
+    box-shadow: 0 2px 4px rgba(27,26,23,0.04), 0 22px 44px -24px rgba(27,26,23,0.22);
+    transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+  }
+  .litter-tile__media > img, .litter-tile__media > video { transition: transform 0.8s cubic-bezier(.16,1,.3,1); }
+  .litter-tile:hover .litter-tile__media { transform: translateY(-4px); }
+  .litter-tile:hover .litter-tile__media > img, .litter-tile:hover .litter-tile__media > video { transform: scale(1.04); }
+  .litter-tile__cap { display: flex; align-items: baseline; gap: 0.6rem; color: #1b1a17; font-size: 0.875rem; font-weight: 600; padding-left: 0.25rem; }
+  .litter-tile__n { font-size: 0.68rem; font-weight: 700; color: #c8b183; }
+  @media (prefers-reduced-motion: reduce) { .litter-tile__media, .litter-tile__media > * { transition: none; } }
+  .link-arrow { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 0.4rem; outline: none; transition: color 0.3s ease; }
+  .link-arrow svg { transition: transform 0.45s cubic-bezier(.16,1,.3,1); }
+  .link-arrow:hover { color: #1b1a17; }
+  .link-arrow:hover svg { transform: translate(2px,-2px); }
+  .link-arrow:focus-visible { box-shadow: 0 0 0 2px #fdfcfa, 0 0 0 4px #c8b183; }
+  .link-arrow:active svg { transform: translate(0,0) scale(0.9); }
+  /* ---------- show news mosaic ---------- */
+  .show-mosaic { display: grid; gap: 4px; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 9.5rem; }
+  .show-mosaic__cell { position: relative; overflow: hidden; background: #ecdfc2; }
+  .show-mosaic__cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(.16,1,.3,1); }
+  .show-mosaic__cell:hover img { transform: scale(1.05); }
+  .show-mosaic__cell--a { grid-column: span 2; grid-row: span 1; }
+  @media (min-width: 640px) {
+    .show-mosaic { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 11rem; }
+    .show-mosaic__cell--a { grid-column: 1 / span 3; grid-row: 1; }
+    .show-mosaic__cell--b { grid-column: 4; grid-row: 1 / span 2; }
+  }
+  @media (min-width: 1024px) { .show-mosaic { grid-auto-rows: 13rem; } }
+  @media (prefers-reduced-motion: reduce) { .show-mosaic__cell img { transition: none; } }
+  .move-note {
+    display: inline-flex; align-items: center; gap: 0.7rem; text-align: left;
+    padding: 0.75rem 1.15rem; border-radius: 999px; background: #f7f1e4; border: 1px solid rgba(200,177,131,0.45);
+    color: #5b5a56; font-size: 0.85rem; line-height: 1.45;
+  }
+  .move-note svg { flex-shrink: 0; color: #a4854f; }
+  .move-note strong { color: #1b1a17; font-weight: 600; }
+  @media (max-width: 639px) { .move-note { border-radius: 1.1rem; } }
+  /* footer photo background: pre-blurred, darkened */
+  .footer-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .footer-bg::before {
+    content: ""; position: absolute; inset: -24px;
+    background: url(assets/img/footer-bg.jpg) 50% 32% / cover no-repeat;
+    filter: blur(3px) saturate(0.9);
+  }
+  .footer-bg::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(164,133,79,0.16), transparent 70%),
+      linear-gradient(180deg, rgba(14,13,12,0.6) 0%, rgba(14,13,12,0.72) 45%, rgba(14,13,12,0.9) 100%);
+  }
+  .review-fb {
+    display: inline-flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
+    padding: 0.45rem 0.85rem; border-radius: 999px; border: 1px solid rgba(200,177,131,0.55);
+    color: #8a723f; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; outline: none;
+    transition: background-color 0.35s ease, color 0.35s ease, transform 0.4s cubic-bezier(.16,1,.3,1);
+  }
+  .review-fb:hover { background: #c8b183; color: #0e0d0c; }
+  .review-fb:focus-visible { box-shadow: 0 0 0 2px #fdfcfa, 0 0 0 4px #c8b183; }
+  .review-fb:active { transform: scale(0.96); }
+  .review-photo { position: relative; aspect-ratio: 4 / 5; border-radius: 1rem; overflow: hidden; background: #ecdfc2; }
+  .review-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(.16,1,.3,1); }
+  .review-photo:hover img { transform: scale(1.04); }
 </style>
 </head>
 
 <body class="bg-paper text-heading antialiased">
 
 <!-- ============ NAV ============ -->
+<svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="laGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4e2ae"/><stop offset=".45" stop-color="#cfa252"/><stop offset=".7" stop-color="#9a6d2a"/><stop offset="1" stop-color="#e3c47f"/></linearGradient></defs></svg>
 <header class="fixed top-0 inset-x-0 z-50 sticky-nav" id="siteNav">
   <div class="max-w-content mx-auto px-6 md:px-8">
-    <div class="flex items-center justify-between py-5 md:py-6 gap-4">
+    <div class="flex items-center justify-between py-3.5 md:py-4 gap-4">
 
-      <a href="#hero" class="flex items-center gap-2.5 shrink-0 group">
-        <img src="assets/img/logo-dark-icon.png" alt="Lucky Alien" width="34" height="19" class="w-[34px] h-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-        <span class="leading-none">
-          <span class="block font-logo text-heading text-2xl leading-none">Lucky Alien</span>
-          <span class="block text-body/70 text-[9px] tracking-[0.26em] mt-1 ml-0.5">PAPILLONS</span>
+      <a href="#hero" class="brand shrink-0" aria-label="Lucky Alien – на початок сторінки">
+        <span class="brand__icon" aria-hidden="true"></span>
+        <span class="brand__word">
+          <svg class="butterfly butterfly--a" viewBox="0 -1 40 33" aria-hidden="true"><g fill="url(#laGold)" stroke="#8a5f1f" stroke-width=".45" stroke-linejoin="round"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g><g transform="translate(40 0) scale(-1 1)"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g></g><ellipse cx="20" cy="18" rx="1.15" ry="7"/></g><path d="M19.6 11.6C18.9 7.6 17.4 4.6 15.4 2.8M20.4 11.6c.7-4 2.2-7 4.2-8.8" fill="none" stroke="#9a6d2a" stroke-width=".9" stroke-linecap="round"/><circle cx="15.2" cy="2.6" r="1" fill="#9a6d2a"/><circle cx="24.8" cy="2.6" r="1" fill="#9a6d2a"/></svg>
+          <span class="brand__lucky gold-text">Lucky</span>
+          <span class="brand__alien gold-text">ALIEN</span>
+          <span class="brand__tag">PAPILLONS</span>
+          <svg class="butterfly butterfly--b" viewBox="0 -1 40 33" aria-hidden="true"><g fill="url(#laGold)" stroke="#8a5f1f" stroke-width=".45" stroke-linejoin="round"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g><g transform="translate(40 0) scale(-1 1)"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g></g><ellipse cx="20" cy="18" rx="1.15" ry="7"/></g><path d="M19.6 11.6C18.9 7.6 17.4 4.6 15.4 2.8M20.4 11.6c.7-4 2.2-7 4.2-8.8" fill="none" stroke="#9a6d2a" stroke-width=".9" stroke-linecap="round"/><circle cx="15.2" cy="2.6" r="1" fill="#9a6d2a"/><circle cx="24.8" cy="2.6" r="1" fill="#9a6d2a"/></svg>
         </span>
       </a>
 
@@ -420,17 +542,18 @@
     <div class="max-w-content mx-auto px-6 md:px-8 py-10 md:py-14">
       <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-1 sm:gap-y-2">
         <a href="#news" class="mobile-link"><span class="mobile-link__n">01</span>Новини</a>
-        <a href="#puppies-available" class="mobile-link"><span class="mobile-link__n">02</span>На продаж</a>
-        <a href="#puppies-about" class="mobile-link"><span class="mobile-link__n">03</span>Про цуценят</a>
-        <a href="#puppies-videos" class="mobile-link"><span class="mobile-link__n">04</span>Відео цуценят</a>
-        <a href="#we-recommend" class="mobile-link"><span class="mobile-link__n">05</span>Рекомендуємо</a>
-        <a href="#puppies-price" class="mobile-link"><span class="mobile-link__n">06</span>Ціни</a>
-        <a href="#deposit" class="mobile-link"><span class="mobile-link__n">07</span>Завдаток</a>
-        <a href="#contract" class="mobile-link"><span class="mobile-link__n">08</span>Договір</a>
-        <a href="#reviews" class="mobile-link"><span class="mobile-link__n">09</span>Відгуки</a>
-        <a href="#prepare" class="mobile-link"><span class="mobile-link__n">10</span>Підготовка</a>
-        <a href="#faq" class="mobile-link"><span class="mobile-link__n">11</span>Питання</a>
-        <a href="#breed" class="mobile-link"><span class="mobile-link__n">12</span>Про породу</a>
+        <a href="#litter-r" class="mobile-link"><span class="mobile-link__n">02</span>Послід «R»</a>
+        <a href="#puppies-available" class="mobile-link"><span class="mobile-link__n">03</span>На продаж</a>
+        <a href="#puppies-about" class="mobile-link"><span class="mobile-link__n">04</span>Про цуценят</a>
+        <a href="#puppies-videos" class="mobile-link"><span class="mobile-link__n">05</span>Відео цуценят</a>
+        <a href="#we-recommend" class="mobile-link"><span class="mobile-link__n">06</span>Рекомендуємо</a>
+        <a href="#puppies-price" class="mobile-link"><span class="mobile-link__n">07</span>Ціни</a>
+        <a href="#deposit" class="mobile-link"><span class="mobile-link__n">08</span>Завдаток</a>
+        <a href="#contract" class="mobile-link"><span class="mobile-link__n">09</span>Договір</a>
+        <a href="#reviews" class="mobile-link"><span class="mobile-link__n">10</span>Відгуки</a>
+        <a href="#prepare" class="mobile-link"><span class="mobile-link__n">11</span>Підготовка</a>
+        <a href="#faq" class="mobile-link"><span class="mobile-link__n">12</span>Питання</a>
+        <a href="#breed" class="mobile-link"><span class="mobile-link__n">13</span>Про породу</a>
       </nav>
 
       <div class="md:hidden flex items-center gap-2 pt-8 text-[11px] normal-case font-normal">
@@ -471,7 +594,7 @@
       </div>
 
       <div class="relative order-1 md:order-2 md:flex-1 h-64 sm:h-80 md:h-auto">
-        <img src="assets/img/hero-papillon.jpg" alt="Цуценя папійона Lucky Alien" class="absolute inset-0 w-full h-full object-cover object-[62%_28%]">
+        <img src="assets/img/hero-papillon-standing.jpg" alt="Папійон Lucky Alien у виставковій стійці" class="absolute inset-0 w-full h-full object-cover object-[50%_30%] md:object-[50%_38%]">
         <div class="absolute bottom-5 right-5 md:bottom-7 md:right-7 z-10 bg-paper/92 backdrop-blur px-4 py-2.5 rounded-full flex items-center gap-2 shadow-[0_10px_24px_-10px_rgba(27,26,23,0.35)]">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-goldDeep" stroke-width="1.8"><path d="M12 2 15 8.5 22 9.3 17 14 18.3 21 12 17.6 5.7 21 7 14 2 9.3 9 8.5 12 2Z"/></svg>
           <span class="text-heading text-xs font-semibold whitespace-nowrap">FCI · з 2017 року</span>
@@ -520,7 +643,7 @@
           <p>Першим кроком на цьому шляху стала поява в домі нашого першого «метелика» – донечки чудового кобеля, <strong class="text-heading font-semibold">імпортованого з Німеччини</strong>. З її появою дім миттєво наповнився легким елегантним шармом, драйвом і <strong class="text-heading font-semibold">безумовною любов'ю</strong>.</p>
         </div>
         <div class="img-frame rounded-[1.5rem] overflow-hidden mt-8 h-64">
-          <img src="assets/img/about-1.jpg" alt="Папійон Lucky Alien" class="w-full h-full object-cover object-[50%_18%]">
+          <img src="assets/img/about-love.jpg" alt="Безумовна любов – папійон Lucky Alien поруч із дитиною" class="w-full h-full object-cover object-[50%_42%]">
         </div>
       </div>
 
@@ -539,7 +662,7 @@
           та життєрадісного характеру. Тому в роботі ми дотримуємось суворих стандартів.
         </p>
         <div class="img-frame rounded-[1.5rem] overflow-hidden mb-8 h-64">
-          <img src="assets/img/breeding-female.jpg" alt="Плідник Lucky Alien на виставковій стійці" class="w-full h-full object-cover">
+          <img src="assets/img/about-standards.jpg" alt="Послід Lucky Alien від 12.10.2025: батьки Oshatosha Unique Micky та Zvezdny Alliance Fantastic Style" class="w-full h-full object-cover object-[60%_50%]">
         </div>
         <div class="grid grid-cols-2 gap-x-6 gap-y-7">
           <div>
@@ -567,8 +690,8 @@
       <div class="reveal pb-16" data-reveal>
         <p class="font-script text-gold text-3xl mb-4">Більше, ніж просто собака</p>
         <h2 class="text-3xl font-semibold text-heading tracking-tight mb-6">Повноправні члени родини</h2>
-        <div class="img-frame rounded-[1.5rem] overflow-hidden mb-8 h-64">
-          <img src="assets/img/about-3.jpg" alt="Папійон Lucky Alien як член родини" class="w-full h-full object-cover object-[50%_20%]">
+        <div class="img-frame rounded-[1.5rem] overflow-hidden mb-8 aspect-[4/5] bg-sand">
+          <video src="assets/video/family.mp4" poster="assets/img/family-poster.jpg" class="w-full h-full object-cover object-[50%_45%]" autoplay muted loop playsinline preload="metadata" aria-label="Відео: папійон Zvezdny Alliance Fantastic Style відпочиває вдома разом із родиною"></video>
         </div>
         <div class="space-y-5 text-body text-[15px] leading-[1.8]">
           <p><strong class="text-heading font-semibold">Головна гордість</strong> нашого розплідника – формат утримання собак. У нас <strong class="text-heading font-semibold">немає вольєрів і кліток</strong>. Усі наші папійони живуть разом із нами вдома, діляться нашим побутом, ростуть <strong class="text-heading font-semibold">вихованими, соціалізованими й контактними</strong>. Вони з захватом супроводжують нас в автомобільних подорожах, заміських прогулянках і будь-яких сімейних пригодах.</p>
@@ -631,13 +754,13 @@
 
         <div class="relative h-[620px] sm:h-[560px] lg:h-[560px] rounded-[2rem] overflow-hidden bg-sand" id="aboutImgBox">
           <div class="about-step-img" data-about-img="0" data-state="active">
-            <img src="assets/img/about-1.jpg" alt="Папійон Lucky Alien на прогулянці" class="w-full h-full object-cover object-[50%_18%]">
+            <img src="assets/img/about-love.jpg" alt="Безумовна любов – папійон Lucky Alien поруч із дитиною" class="w-full h-full object-cover object-[50%_40%]">
           </div>
           <div class="about-step-img" data-about-img="1" data-state="upcoming">
-            <img src="assets/img/breeding-female.jpg" alt="Плідник Lucky Alien на виставковій стійці" class="w-full h-full object-cover">
+            <img src="assets/img/about-standards.jpg" alt="Послід Lucky Alien від 12.10.2025: батьки Oshatosha Unique Micky та Zvezdny Alliance Fantastic Style" class="w-full h-full object-cover object-[64%_50%]">
           </div>
           <div class="about-step-img" data-about-img="2" data-state="upcoming">
-            <img src="assets/img/about-3.jpg" alt="Папійон Lucky Alien як член родини" class="w-full h-full object-cover object-[50%_20%]">
+            <video src="assets/video/family.mp4" poster="assets/img/family-poster.jpg" class="w-full h-full object-cover object-[50%_28%]" autoplay muted loop playsinline preload="metadata" aria-label="Відео: папійон Zvezdny Alliance Fantastic Style відпочиває вдома разом із родиною"></video>
           </div>
         </div>
 
@@ -661,8 +784,8 @@
     </div>
 
     <div class="card-elevated grid md:grid-cols-2 overflow-hidden reveal" data-reveal>
-      <div class="img-frame h-72 md:h-auto">
-        <img src="assets/img/breeding-female.jpg" alt="Zvezdny Alliance Fantastic Style – плідниця Lucky Alien" class="w-full h-full object-cover">
+      <div class="img-frame aspect-[1052/1280] md:aspect-auto md:h-auto bg-ink">
+        <img src="assets/img/breeding-fantastic-style.jpg" alt="Zvezdny Alliance Fantastic Style – плідниця Lucky Alien, інтерчемпіон" class="w-full h-full object-cover object-[50%_8%]">
       </div>
       <div class="p-8 md:p-12 flex flex-col justify-center">
         <span class="chip w-fit mb-5">Плідниця</span>
@@ -722,10 +845,29 @@
       </p>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+    <div class="grid lg:grid-cols-3 gap-6 md:gap-8">
 
-      <article class="card-elevated overflow-hidden reveal" data-reveal>
-        <div class="img-frame h-56">
+      <article class="card-elevated overflow-hidden lg:col-span-2 reveal" data-reveal>
+        <div class="show-mosaic">
+          <div class="show-mosaic__cell show-mosaic__cell--a"><img src="assets/img/show-2025-1.jpg" alt="Олексій Іовчев із папійоном на п'єдесталі виставки в Болгарії" class="object-[42%_70%]"></div>
+          <div class="show-mosaic__cell show-mosaic__cell--b"><img src="assets/img/show-2025-2.jpg" alt="Олексій Іовчев тримає папійона на п'єдесталі Cupa Dunării" class="object-[50%_35%]"></div>
+          <div class="show-mosaic__cell"><img src="assets/img/show-2025-3.jpg" alt="Юний хендлер Олексій Іовчев показує папійона в рингу" class="object-[50%_32%]"></div>
+          <div class="show-mosaic__cell"><img src="assets/img/show-2025-4.jpg" alt="Олексій Іовчев піднімає кубок на нагородженні" class="object-[72%_42%]"></div>
+          <div class="show-mosaic__cell"><img src="assets/img/show-2025-5.jpg" alt="Нагородження Cupa Dunării: папійон Lucky Alien на першому місці" class="object-[55%_60%]"></div>
+        </div>
+        <div class="p-7 md:p-9">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="chip">Папійон</span>
+            <span class="chip">Junior Handling</span>
+            <span class="text-body text-xs ml-1">Болгарія та Румунія · 2025</span>
+          </div>
+          <h3 class="text-heading font-semibold text-xl md:text-2xl tracking-tight mb-3">Перемагати з папійоном – легко й комфортно</h3>
+          <p class="text-body text-[14px] leading-relaxed max-w-2xl">Виставки в Болгарії та Румунії 2025 року: юний хендлер <strong class="text-heading font-semibold">Олексій Іовчев</strong> виходить у ринг Junior Handling разом із нашим папійоном. Уважний, контактний і впевнений собака стає справжнім партнером – навіть для наймолодшого хендлера.</p>
+        </div>
+      </article>
+
+      <article class="card-elevated overflow-hidden flex flex-col reveal reveal-delay-1" data-reveal>
+        <div class="img-frame h-56 lg:h-auto lg:flex-1 lg:min-h-[14rem]">
           <img src="assets/img/news-1.jpg" alt="Народився послід М – папійони Lucky Alien" class="w-full h-full object-cover object-top">
         </div>
         <div class="p-6">
@@ -735,48 +877,6 @@
           </div>
           <h3 class="text-heading font-semibold text-base mb-2">Народився послід М</h3>
           <p class="text-body text-[13px] leading-relaxed">Zvezdny Alliance Fantastic Style та Fashion Rid Keeper of My Soul привітали 1 дівчинку триколор і 1 хлопчика ред-сейбл.</p>
-        </div>
-      </article>
-
-      <article class="card-elevated overflow-hidden reveal reveal-delay-1" data-reveal>
-        <div class="img-frame h-56">
-          <img src="assets/img/news-2.jpg" alt="Новий послід P – басенджі Lucky Alien" class="w-full h-full object-cover object-top">
-        </div>
-        <div class="p-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="chip">Басенджі</span>
-            <span class="text-body text-xs">Грудень 2024</span>
-          </div>
-          <h3 class="text-heading font-semibold text-base mb-2">Новий послід «P»</h3>
-          <p class="text-body text-[13px] leading-relaxed">Розплідник Lucky Alien також займається розведенням басенджі – послід від Pilot to Paradise Into Lighting та Itury Puzzle Blackmore Fan: 3 хлопчики й 1 дівчинка.</p>
-        </div>
-      </article>
-
-      <article class="card-elevated overflow-hidden reveal reveal-delay-2" data-reveal>
-        <div class="img-frame h-56">
-          <img src="assets/img/news-3.jpg" alt="Lucky Alien Protective King – басенджі" class="w-full h-full object-cover object-top">
-        </div>
-        <div class="p-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="chip">Басенджі</span>
-            <span class="text-body text-xs">2025</span>
-          </div>
-          <h3 class="text-heading font-semibold text-base mb-2">Перші титули Protective King</h3>
-          <p class="text-body text-[13px] leading-relaxed">Наш басенджі відзначився на виставках: Suprim Best Baby in Show, Чемпіон цуценят Болгарії, Юний Чемпіон і Юний Гранд-чемпіон Румунії.</p>
-        </div>
-      </article>
-
-      <article class="card-elevated overflow-hidden reveal reveal-delay-3" data-reveal>
-        <div class="img-frame h-56">
-          <img src="assets/img/news-4.jpg" alt="Послід H – басенджі Lucky Alien" class="w-full h-full object-cover object-top">
-        </div>
-        <div class="p-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="chip">Басенджі</span>
-            <span class="text-body text-xs">2025</span>
-          </div>
-          <h3 class="text-heading font-semibold text-base mb-2">Послід «H»</h3>
-          <p class="text-body text-[13px] leading-relaxed">Ще одне поповнення серед наших басенджі – від Bashira Diego Hunter та Itury Puzzle Blackmore Fan.</p>
         </div>
       </article>
 
@@ -801,6 +901,92 @@
       <div class="rounded-[1.75rem] overflow-hidden h-72 sm:h-96 md:h-[28rem] shadow-[0_24px_48px_-24px_rgba(27,26,23,0.22)]">
         <img src="assets/img/puppies-about.jpg" alt="Цуценята папійона Lucky Alien" class="w-full h-full object-cover object-[50%_18%]">
       </div>
+    </div>
+
+    <!-- ---- R litter follow-up ---- -->
+    <div id="litter-r" class="scroll-mt-28">
+      <div class="text-center max-w-xl mx-auto mb-14 reveal" data-reveal>
+        <p class="font-script text-gold text-3xl md:text-4xl mb-2">Послід «R»</p>
+        <h3 class="text-2xl md:text-3xl font-semibold text-heading tracking-tight mb-5">Слідкуйте за нашими малюками</h3>
+        <p class="text-body text-[15px] leading-relaxed">
+          12 жовтня 2025 року у Zvezdny Alliance Fantastic Style та Oshatosha Unique Micky
+          народилися четверо хлопчиків. Тут ми ділимося тим, як ростуть малюки – від перших днів до нових домівок.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-[1.55fr_1fr] gap-8 md:gap-10 items-stretch mb-16 md:mb-20">
+        <div class="litter-poster reveal" data-reveal>
+          <video src="assets/video/litter-r-poster.mp4" poster="assets/img/litter-r-poster.jpg" class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" aria-label="Анонс посліду «R» Lucky Alien: 4 хлопчики папійона, народжені 12.10.2025"></video>
+        </div>
+
+        <div class="card-elevated p-8 md:p-10 flex flex-col reveal reveal-delay-1" data-reveal>
+          <div class="flex flex-wrap items-center gap-2 mb-7">
+            <span class="chip">4 хлопчики</span>
+            <span class="chip">Народились 12.10.2025</span>
+            <span class="chip">1 шукає дім</span>
+          </div>
+
+          <dl class="space-y-6 mb-8">
+            <div>
+              <dt class="text-heading/70 text-xs font-bold uppercase tracking-[0.14em] mb-1.5">Батько</dt>
+              <dd class="text-heading font-semibold text-lg leading-snug">Oshatosha Unique Micky</dd>
+              <dd class="text-body text-[13.5px] leading-relaxed mt-1">Чемпіон Болгарії, Македонії, Греції та Сербії</dd>
+            </div>
+            <div>
+              <dt class="text-heading/70 text-xs font-bold uppercase tracking-[0.14em] mb-1.5">Матір</dt>
+              <dd class="text-heading font-semibold text-lg leading-snug">Zvezdny Alliance Fantastic Style</dd>
+              <dd class="text-body text-[13.5px] leading-relaxed mt-1">Інтерчемпіон, Гранд-чемпіон Болгарії, Румунії та Молдови</dd>
+            </div>
+          </dl>
+
+          <p class="text-body text-[13.5px] leading-relaxed mb-8">Обидва батьки генетично протестовані. Цуценята ростуть удома, серед родини, з родоводом FCI.</p>
+
+          <div class="mt-auto flex flex-wrap gap-3">
+            <a href="#puppies-available" class="btn-pill btn-outline-gold">Хто шукає дім</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-end justify-between gap-6 mb-8 reveal" data-reveal>
+        <h4 class="text-xl md:text-2xl font-semibold text-heading tracking-tight">З життя наших цуценят</h4>
+        <a href="https://instagram.com/basenjlucky" target="_blank" rel="noopener" class="link-arrow text-sm font-semibold text-goldDeep shrink-0">Більше в Instagram<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <figure class="litter-tile reveal" data-reveal>
+          <div class="litter-tile__media">
+            <img src="assets/img/litter-r-newborn.jpg" alt="Новонароджені цуценята посліду «R» Lucky Alien" class="w-full h-full object-cover object-[50%_55%]">
+          </div>
+          <figcaption class="litter-tile__cap"><span class="litter-tile__n">01</span>Перші дні життя</figcaption>
+        </figure>
+
+        <figure class="litter-tile reveal reveal-delay-1" data-reveal>
+          <div class="litter-tile__media">
+            <img src="assets/img/litter-r-sleep.jpg" alt="Цуценята посліду «R» сплять, пригорнувшись одне до одного" class="w-full h-full object-cover object-[30%_50%]">
+          </div>
+          <figcaption class="litter-tile__cap"><span class="litter-tile__n">02</span>Разом тепліше</figcaption>
+        </figure>
+
+        <figure class="litter-tile reveal reveal-delay-2" data-reveal>
+          <div class="litter-tile__media">
+            <video src="assets/video/litter-r.mp4" poster="assets/img/litter-r-video-poster.jpg" class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" aria-label="Відео: цуценята посліду «R» роблять перші кроки"></video>
+          </div>
+          <figcaption class="litter-tile__cap"><span class="litter-tile__n">03</span>Перші кроки</figcaption>
+        </figure>
+
+        <figure class="litter-tile reveal reveal-delay-3" data-reveal>
+          <div class="litter-tile__media">
+            <video src="assets/video/mirabella.mp4" poster="assets/img/mirabella-video-poster.jpg" class="w-full h-full object-cover object-[50%_60%]" autoplay muted loop playsinline preload="metadata" aria-label="Відео: Lucky Alien Mirabella на прогулянці"></video>
+          </div>
+          <figcaption class="litter-tile__cap"><span class="litter-tile__n">04</span>Lucky Alien Mirabella</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="my-16 md:my-24">
+      <svg class="wave text-gold" viewBox="0 0 1200 90" preserveAspectRatio="none">
+        <path d="M0,45 C150,-20 300,110 450,45 C600,-20 750,110 900,45 C1000,10 1100,85 1200,45" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
     </div>
 
     <!-- ---- About our puppies ---- -->
@@ -840,7 +1026,11 @@
     <div id="puppies-available" class="scroll-mt-28">
       <div class="text-center max-w-xl mx-auto mb-14 reveal" data-reveal>
         <p class="font-script text-gold text-3xl md:text-4xl mb-2">Зараз доступні</p>
-        <h3 class="text-2xl md:text-3xl font-semibold text-heading tracking-tight">Цуценята в добрі руки</h3>
+        <h3 class="text-2xl md:text-3xl font-semibold text-heading tracking-tight mb-6">Цуценята в добрі руки</h3>
+        <p class="move-note">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5.5h4V20"/></svg>
+          <span>Переїзд у новий дім – у <strong>3–3,5 місяця</strong>, після повного курсу вакцинації</span>
+        </p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8 md:gap-10">
@@ -851,7 +1041,7 @@
           </div>
           <div class="p-7 md:p-9">
             <div class="flex items-center justify-between gap-3 mb-4">
-              <span class="chip">Хлопчик · шукає дім</span>
+              <span class="chip">Останній із посліду «R» · шукає дім</span>
               <span class="text-body text-xs">Народився 12.10.2025</span>
             </div>
             <h4 class="text-xl md:text-2xl font-semibold text-heading mb-4">Lucky Alien Roblox</h4>
@@ -861,7 +1051,7 @@
               <li class="flex gap-2"><span class="text-gold">—</span>Від повністю здорових, генетично протестованих батьків</li>
             </ul>
             <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 pt-5 border-t border-heading/10">
-              <span class="text-heading font-semibold whitespace-nowrap">€1500 – €2500</span>
+              <span class="text-heading font-semibold whitespace-nowrap">€1000 – €2500</span>
               <a href="#contact" class="btn-pill btn-outline-gold">Запитати</a>
             </div>
           </div>
@@ -873,18 +1063,18 @@
           </div>
           <div class="p-7 md:p-9">
             <div class="flex items-center justify-between gap-3 mb-4">
-              <span class="chip">4 хлопчики · новий послід</span>
+              <span class="chip">Послід «R» · 4 хлопчики</span>
               <span class="text-body text-xs">Народились 12.10.2025</span>
             </div>
-            <h4 class="text-xl md:text-2xl font-semibold text-heading mb-4">Новий послід Lucky Alien</h4>
+            <h4 class="text-xl md:text-2xl font-semibold text-heading mb-4">Послід «R» Lucky Alien</h4>
             <ul class="text-body text-[13.5px] leading-relaxed space-y-1.5 mb-6">
-              <li class="flex gap-2"><span class="text-gold">—</span>Батько: Fashion Rid Keeper of My Soul</li>
+              <li class="flex gap-2"><span class="text-gold">—</span>Батько: Oshatosha Unique Micky</li>
               <li class="flex gap-2"><span class="text-gold">—</span>Матір: Zvezdny Alliance Fantastic Style</li>
-              <li class="flex gap-2"><span class="text-gold">—</span>Від повністю здорових, генетично протестованих батьків</li>
+              <li class="flex gap-2"><span class="text-gold">—</span>Вільним залишився лише один хлопчик – Lucky Alien Roblox</li>
             </ul>
             <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 pt-5 border-t border-heading/10">
-              <span class="text-heading font-semibold whitespace-nowrap">€1500 – €2500</span>
-              <a href="#contact" class="btn-pill btn-outline-gold">Забронювати</a>
+              <span class="text-heading font-semibold whitespace-nowrap">€1000 – €2500</span>
+              <a href="#contact" class="btn-pill btn-outline-gold">Запитати про Roblox</a>
             </div>
           </div>
         </div>
@@ -948,7 +1138,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16.2" rx="5" ry="4.1"/><ellipse cx="4.8" cy="9.2" rx="2.2" ry="2.8"/><ellipse cx="9.8" cy="5.2" rx="2.2" ry="2.8"/><ellipse cx="14.7" cy="5.4" rx="2.2" ry="2.7"/><ellipse cx="19.1" cy="9.6" rx="2" ry="2.6"/></svg>
           </span>
           <p class="text-heading font-semibold mb-2">Прогулянки</p>
-          <p class="text-body text-[13.5px] leading-relaxed">Курс вакцинації завершується приблизно у 4 місяці – до цього часу уникайте контакту з незнайомими собаками.</p>
+          <p class="text-body text-[13.5px] leading-relaxed">Цуценя переїжджає до вас уже з завершеним курсом вакцинації. Знайомте його з вулицею, людьми й іншими собаками поступово – короткими спокійними прогулянками.</p>
         </div>
         <div class="card-elevated p-6 reveal reveal-delay-2" data-reveal>
           <span class="flex items-center justify-center w-11 h-11 rounded-full bg-ink text-paper mb-5">
@@ -981,7 +1171,7 @@
         <h3 class="text-2xl md:text-3xl font-semibold text-heading tracking-tight">Ціни на цуценят</h3>
       </div>
       <div class="card-elevated max-w-2xl mx-auto p-8 md:p-12 text-center reveal" data-reveal>
-        <p class="text-heading text-4xl md:text-5xl font-bold tracking-tight mb-2">€1500 – €2500</p>
+        <p class="text-heading text-4xl md:text-5xl font-bold tracking-tight mb-2">€1000 – €2500</p>
         <p class="text-body text-sm mb-9">Точна вартість залежить від статі, класу та забарвлення цуценяти</p>
         <div class="grid sm:grid-cols-2 gap-x-8 gap-y-3 text-left max-w-md mx-auto mb-9">
           <p class="flex gap-2 text-body text-[14px]"><span class="text-gold">—</span>Родовід FCI</p>
@@ -1052,25 +1242,39 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
       <div class="card-elevated p-8 md:p-10 flex flex-col reveal" data-reveal>
         <svg width="30" height="24" viewBox="0 0 30 24" fill="none" class="text-gold mb-5"><path d="M0 24V14.4C0 9.867 1.067 6.267 3.2 3.6 5.333 1.2 8.133 0 11.6 0v4.8c-2.133 0-3.733.667-4.8 2-1.067 1.333-1.6 3.067-1.6 5.2h5.6V24H0Zm16.8 0V14.4c0-4.533 1.067-8.133 3.2-10.8C22.133 1.2 24.933 0 28.4 0v4.8c-2.133 0-3.733.667-4.8 2-1.067 1.333-1.6 3.067-1.6 5.2h5.6V24H16.8Z" fill="currentColor"/></svg>
         <p class="text-body text-[15px] leading-relaxed mb-8 flex-1">Наше цуценя виросло у справжнього члена родини – ласкаве, розумне, завжди поруч. Дякуємо розпліднику Lucky Alien за таку турботу на кожному етапі, від першого дзвінка до сьогодні!</p>
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded-full overflow-hidden shrink-0">
-            <img src="assets/img/review-2.jpg" alt="Власниця цуценяти Lucky Alien" class="w-full h-full object-cover object-top">
+            <img src="assets/img/review-2.jpg" alt="Dumitrescu Codruta – власниця цуценяти Lucky Alien" class="w-full h-full object-cover object-top">
           </div>
-          <p class="text-heading font-semibold text-sm">Власниця цуценяти Lucky Alien</p>
+          <div class="min-w-0 flex-1">
+            <p class="text-heading font-semibold text-sm">Dumitrescu Codruta</p>
+            <p class="text-body text-xs mt-0.5">Крайова, Румунія</p>
+          </div>
+          <a href="https://www.facebook.com/share/1DD7npA3PR/" target="_blank" rel="noopener" class="review-fb" aria-label="Відгук Dumitrescu Codruta у Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8Z"/></svg>
+            <span>Facebook</span>
+          </a>
         </div>
       </div>
       <div class="card-elevated p-8 md:p-10 flex flex-col reveal reveal-delay-1" data-reveal>
         <svg width="30" height="24" viewBox="0 0 30 24" fill="none" class="text-gold mb-5"><path d="M0 24V14.4C0 9.867 1.067 6.267 3.2 3.6 5.333 1.2 8.133 0 11.6 0v4.8c-2.133 0-3.733.667-4.8 2-1.067 1.333-1.6 3.067-1.6 5.2h5.6V24H0Zm16.8 0V14.4c0-4.533 1.067-8.133 3.2-10.8C22.133 1.2 24.933 0 28.4 0v4.8c-2.133 0-3.733.667-4.8 2-1.067 1.333-1.6 3.067-1.6 5.2h5.6V24H16.8Z" fill="currentColor"/></svg>
-        <p class="text-body text-[15px] leading-relaxed mb-8 flex-1">Приємно було отримати цуценя разом із такою турботливою підтримкою від заводчика. Наш песик здоровий, грайливий і дуже прив'язаний до нас – саме про такого папійона ми мріяли.</p>
+        <p class="text-body text-[15px] leading-relaxed mb-6">Приємно було отримати цуценя разом із такою турботливою підтримкою від заводчика. Наш песик здоровий, грайливий і дуже прив'язаний до нас – саме про такого папійона ми мріяли.</p>
+        <div class="grid grid-cols-2 gap-3 mb-8 flex-1">
+          <div class="review-photo"><img src="assets/img/review-teodora-1.jpg" alt="Папійон Lucky Alien у новому домі разом із йоркширським тер'єром" class="object-[30%_40%]"></div>
+          <div class="review-photo"><img src="assets/img/review-teodora-2.jpg" alt="Папійон Lucky Alien грається з другим песиком родини" class="object-[45%_30%]"></div>
+        </div>
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded-full overflow-hidden shrink-0">
-            <img src="assets/img/review-1.jpg" alt="Власниця цуценяти Lucky Alien" class="w-full h-full object-cover object-top">
+            <img src="assets/img/review-1.jpg" alt="Kun Teodora-Adina – власниця цуценяти Lucky Alien" class="w-full h-full object-cover object-top">
           </div>
-          <p class="text-heading font-semibold text-sm">Власниця цуценяти Lucky Alien</p>
+          <div class="min-w-0 flex-1">
+            <p class="text-heading font-semibold text-sm">Kun Teodora-Adina</p>
+            <p class="text-body text-xs mt-0.5">Сібіу, Румунія</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1084,7 +1288,7 @@
       <p class="font-script text-gold text-3xl md:text-4xl mb-2">Підготовка</p>
       <h2 class="text-3xl md:text-4xl font-semibold text-heading tracking-tight mb-5">Перед тим як забрати цуценя</h2>
       <p class="text-body text-[15px] leading-relaxed">
-        Кілька простих кроків, які допоможуть цуценяті швидко й спокійно освоїтися у новому домі.
+        Цуценя переїжджає до вас у віці 3–3,5 місяця, після завершення курсу вакцинації. Ось кілька простих кроків, які допоможуть йому швидко й спокійно освоїтися у новому домі.
       </p>
     </div>
 
@@ -1110,13 +1314,13 @@
           <a href="#contact" class="btn-pill btn-outline-light w-fit">Маєте питання?</a>
         </div>
         <div class="reveal reveal-delay-1 rounded-[1.75rem] overflow-hidden h-72 md:h-auto order-1 md:order-2" data-reveal>
-          <img src="assets/img/prepare-2.jpg" alt="Перенеска для цуценяти в день переїзду" class="w-full h-full object-cover object-top">
+          <img src="assets/img/prepare-play.jpg" alt="Двоє папійонів Lucky Alien граються, стоячи на задніх лапках" class="w-full h-full object-cover object-[50%_18%]">
         </div>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 md:gap-8">
         <div class="reveal rounded-[1.75rem] overflow-hidden h-72 md:h-auto" data-reveal>
-          <img src="assets/img/prepare-3.jpg" alt="Ветеринарний огляд цуценяти" class="w-full h-full object-cover object-[50%_25%]">
+          <img src="assets/img/prepare-vet.jpg" alt="Здоровий папійон Lucky Alien на прогулянці" class="w-full h-full object-cover object-[50%_58%]">
         </div>
         <div class="reveal reveal-delay-1 bg-ink grain rounded-[1.75rem] p-8 sm:p-10 md:p-12 flex flex-col justify-center" data-reveal>
           <p class="text-goldPale/70 text-xs font-bold uppercase tracking-[0.16em] mb-4">Здоров'я з першого дня</p>
@@ -1169,7 +1373,7 @@
       </details>
       <details class="faq-item">
         <summary>Коли цуценя готове переїхати в новий дім?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p>Зазвичай цуценята готові до переїзду у віці 2–3 місяців, після першої вакцинації.</p>
+        <p>Цуценята переїжджають у новий дім у віці 3–3,5 місяця – після завершення повного курсу вакцинації. До цього часу малюк росте у нас удома, поруч із мамою та родиною.</p>
       </details>
     </div>
   </div>
@@ -1189,7 +1393,7 @@
     <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-start">
 
       <div class="reveal rounded-[1.75rem] overflow-hidden h-80 md:h-full" data-reveal>
-        <img src="assets/img/credential-2.jpg" alt="Папійон Lucky Alien" class="w-full h-full object-cover">
+        <img src="assets/img/breed-papillon.jpg" alt="Папійон Lucky Alien – континентальний той-спанієль із характерними вушками-метеликами" class="w-full h-full object-cover object-[50%_40%]">
       </div>
 
       <div class="reveal reveal-delay-1" data-reveal>
@@ -1349,17 +1553,23 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer class="relative bg-ink grain overflow-hidden pt-20 pb-8">
+<footer class="relative isolate bg-ink grain overflow-hidden pt-20 pb-8">
+  <div class="footer-bg" aria-hidden="true"></div>
   <img src="assets/img/logo-light-icon.png" alt="" class="absolute -bottom-24 -left-24 w-[34rem] opacity-[0.06] pointer-events-none select-none" aria-hidden="true">
 
   <div class="relative max-w-content mx-auto px-6 md:px-8">
     <div class="grid md:grid-cols-[1.4fr_1fr_1fr] gap-10 md:gap-8 pb-14 border-b border-white/10">
-      <div class="flex items-center gap-3">
-        <img src="assets/img/logo-light-icon.png" alt="Lucky Alien" class="w-12 h-auto shrink-0 opacity-90">
-        <span class="leading-none">
-          <span class="block font-logo text-white text-[1.75rem] leading-none">Lucky Alien</span>
-          <span class="block text-goldPale/60 text-xs tracking-[0.28em] mt-1.5 ml-0.5">PAPILLONS</span>
-        </span>
+      <div>
+        <a href="#hero" class="brand brand--light" aria-label="Lucky Alien – на початок сторінки">
+          <span class="brand__icon" aria-hidden="true"></span>
+          <span class="brand__word">
+            <svg class="butterfly butterfly--a" viewBox="0 -1 40 33" aria-hidden="true"><g fill="url(#laGold)" stroke="#8a5f1f" stroke-width=".45" stroke-linejoin="round"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g><g transform="translate(40 0) scale(-1 1)"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g></g><ellipse cx="20" cy="18" rx="1.15" ry="7"/></g><path d="M19.6 11.6C18.9 7.6 17.4 4.6 15.4 2.8M20.4 11.6c.7-4 2.2-7 4.2-8.8" fill="none" stroke="#9a6d2a" stroke-width=".9" stroke-linecap="round"/><circle cx="15.2" cy="2.6" r="1" fill="#9a6d2a"/><circle cx="24.8" cy="2.6" r="1" fill="#9a6d2a"/></svg>
+            <span class="brand__lucky gold-text">Lucky</span>
+            <span class="brand__alien gold-text">ALIEN</span>
+            <span class="brand__tag">PAPILLONS</span>
+            <svg class="butterfly butterfly--b" viewBox="0 -1 40 33" aria-hidden="true"><g fill="url(#laGold)" stroke="#8a5f1f" stroke-width=".45" stroke-linejoin="round"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g><g transform="translate(40 0) scale(-1 1)"><g class="wing"><path d="M19.5 14.6C17.4 8.6 11.6 3.2 3 1.6 1.2 1.3.4 2.4 1.2 4c1.9 3.8 3 8 6.4 10.4 3.4 2.3 8.2 2.1 11.9 1.5Z"/><path d="M19.5 17.1c-4.4-.4-9.8 1-11.4 5.4-1.1 3.1.1 7.2 2.9 7.9 3.5.8 6.6-5.3 8.5-11.6Z"/><path d="M5 5.2c2.6.6 5.4 2.6 7.2 5" fill="none" stroke="#7a521a" stroke-opacity=".35" stroke-width=".6" stroke-linecap="round"/></g></g><ellipse cx="20" cy="18" rx="1.15" ry="7"/></g><path d="M19.6 11.6C18.9 7.6 17.4 4.6 15.4 2.8M20.4 11.6c.7-4 2.2-7 4.2-8.8" fill="none" stroke="#9a6d2a" stroke-width=".9" stroke-linecap="round"/><circle cx="15.2" cy="2.6" r="1" fill="#9a6d2a"/><circle cx="24.8" cy="2.6" r="1" fill="#9a6d2a"/></svg>
+          </span>
+        </a>
       </div>
 
       <div>
@@ -1435,7 +1645,7 @@
 
   // menu link scroll-spy (highlights current section next time the menu opens)
   const menuLinks = document.querySelectorAll('.mobile-link');
-  const spySections = ['news', 'puppies-available', 'puppies-about', 'puppies-videos', 'we-recommend', 'puppies-price', 'deposit', 'contract', 'reviews', 'prepare', 'faq', 'breed']
+  const spySections = ['news', 'litter-r', 'puppies-about', 'puppies-available', 'puppies-videos', 'we-recommend', 'puppies-price', 'deposit', 'contract', 'reviews', 'prepare', 'faq', 'breed']
     .map(id => document.getElementById(id))
     .filter(Boolean);
   const spy = new IntersectionObserver((entries) => {
