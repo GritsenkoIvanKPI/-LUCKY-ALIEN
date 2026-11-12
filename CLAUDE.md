@@ -57,3 +57,8 @@ No emoji icons. No inline styles. No generic gradients.
 - Do not stop after one screenshot pass
 - Do not use `transition-all`
 - Do not use default Tailwind blue/indigo as primary color
+
+## Translations (UA source → RU / EN / RO)
+- `index.html` (Ukrainian) is the only file to edit by hand. `ru/`, `en/`, `ro/` are generated — never edit them directly.
+- After any text change in `index.html`: run `python3 i18n/i18n.py extract` then `python3 i18n/i18n.py build`. The build lists every Ukrainian string still missing a translation.
+- Add missing translations to `i18n/ru.json`, `i18n/en.json`, `i18n/ro.json` (`{"ukrainian text": "translation"}`, keep inline HTML tags identical), then run `build` again and commit the regenerated folders.

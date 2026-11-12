@@ -21,7 +21,7 @@ const types = {
 
 http.createServer((req, res) => {
   let reqPath = decodeURIComponent(req.url.split("?")[0]);
-  if (reqPath === "/") reqPath = "/index.html";
+  if (reqPath.endsWith("/")) reqPath += "index.html";
   const filePath = path.join(root, reqPath);
   if (!filePath.startsWith(root)) { res.writeHead(403); res.end(); return; }
   fs.readFile(filePath, (err, data) => {

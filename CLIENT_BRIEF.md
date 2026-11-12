@@ -5,8 +5,8 @@ One-page informational website introducing a papillon (Continental Toy Spaniel) 
 the breeders, and the puppies available, for a worldwide audience.
 
 ## Languages
-- Ukrainian — build now (only language in this pass)
-- Russian, English, Romanian — to be added later (out of scope for now)
+- Ukrainian — source (`index.html`)
+- Russian, English, Romanian — live at `/ru/`, `/en/`, `/ro/`, generated from Ukrainian via `i18n/i18n.py`
 
 ## Site structure (as of the August 2026 full overhaul)
 1. Navigation (8 pills: Головна · Про нас · Плідники · Цуценята · Новини · Відгуки · Порода · Контакти)
